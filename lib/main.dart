@@ -1,3 +1,5 @@
+import 'package:data/utils/routes/routes.dart';
+import 'package:data/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 
 import 'utils/routes/routes.dart';
@@ -14,15 +16,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xff191A2F),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           elevation: 0,
         ),
       ),
-      initialRoute: RoutesName.home,
+      initialRoute: RoutesName.splash,
+
       onGenerateRoute: Routes.generateRoute,
     );
   }
