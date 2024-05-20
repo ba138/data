@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
