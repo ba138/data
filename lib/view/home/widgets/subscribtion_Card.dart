@@ -8,7 +8,9 @@ import '../../../res/components/vertical_speacing.dart';
 class SubscribtionCard extends StatelessWidget {
   const SubscribtionCard({
     super.key,
+    required this.bgColor,
   });
+  final Color bgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class SubscribtionCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: const Color(0xff3F30BD),
+        color: bgColor,
       ),
       child: Stack(
         children: [
