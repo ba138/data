@@ -2,7 +2,7 @@ import 'package:data/res/components/colors.dart';
 import 'package:data/res/components/vertical_speacing.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'widgets/subscribtion_Card.dart';
 import 'widgets/trianglePainter.dart';
 
 class HomeView extends StatefulWidget {
@@ -131,14 +131,7 @@ class _HomeViewState extends State<HomeView> {
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
           child: Column(
             children: [
-              Container(
-                height: 156,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Color(0xff3F30BD),
-                ),
-              ),
+              SubscribtionCard(),
             ],
           ),
         ),
