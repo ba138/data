@@ -1,5 +1,6 @@
 import 'package:data/res/components/colors.dart';
 import 'package:data/res/components/vertical_speacing.dart';
+import 'package:data/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'widgets/subscribtion_Card.dart';
@@ -113,13 +114,18 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
-              Text(
-                'Vew all',
-                style: GoogleFonts.getFont(
-                  "Poppins",
-                  textStyle: const TextStyle(
-                    color: AppColor.whiteColor,
-                    fontSize: 16.0,
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, RoutesName.allSubscriptionView);
+                },
+                child: Text(
+                  'Vew all',
+                  style: GoogleFonts.getFont(
+                    "Poppins",
+                    textStyle: const TextStyle(
+                      color: AppColor.whiteColor,
+                      fontSize: 16.0,
+                    ),
                   ),
                 ),
               ),
@@ -129,10 +135,20 @@ class _HomeViewState extends State<HomeView> {
         const VerticalSpeacing(20.0),
         Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-          child: Column(
-            children: [
-              SubscribtionCard(),
-            ],
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height /1.8,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: [
+                  SubscribtionCard(bgColor: Color(0xff3F30BD)),
+                  const VerticalSpeacing(16.0),
+                  SubscribtionCard(bgColor: Color(0xff3B8FE9)),
+                  const VerticalSpeacing(16.0),
+                  SubscribtionCard(bgColor: Color(0xff30BD82)),
+                ],
+              ),
+            ),
           ),
         ),
       ],
