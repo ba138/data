@@ -4,6 +4,7 @@ import 'package:data/view/auth/login_view.dart';
 import 'package:data/view/auth/register_screen.dart';
 import 'package:data/view/auth/splash_view.dart';
 import 'package:data/view/home/home_view.dart';
+import 'package:data/view/profile/profile.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -24,6 +25,9 @@ class Routes {
       case RoutesName.forget:
         return MaterialPageRoute(
             builder: (BuildContext context) => const ForgetPasswordScreen());
+      case RoutesName.profile:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const ProfileScreen());
       default:
         return MaterialPageRoute(builder: (_) {
           return const Scaffold(

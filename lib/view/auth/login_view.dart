@@ -68,7 +68,14 @@ class LoginView extends StatelessWidget {
                   ],
                 ),
                 const VerticalSpeacing(30),
-                RoundedButton(title: "Login", onpress: () {}),
+                RoundedButton(
+                    title: "Login",
+                    onpress: () {
+                      Navigator.pushNamed(
+                        context,
+                        RoutesName.home,
+                      );
+                    }),
                 const VerticalSpeacing(30),
                 Text(
                   "Or Continue With",

@@ -1,5 +1,6 @@
 import 'package:data/res/components/colors.dart';
 import 'package:data/res/components/vertical_speacing.dart';
+import 'package:data/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'widgets/subscribtion_Card.dart';
@@ -33,10 +34,18 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   const VerticalSpeacing(30),
                   ListTile(
-                    leading: const CircleAvatar(
-                      radius: 40.0,
-                      backgroundImage: NetworkImage(
-                          'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                    leading: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          RoutesName.profile,
+                        );
+                      },
+                      child: const CircleAvatar(
+                        radius: 40.0,
+                        backgroundImage: NetworkImage(
+                            'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                      ),
                     ),
                     title: Text(
                       'Alizay Khan',

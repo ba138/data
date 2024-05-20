@@ -3,6 +3,7 @@ import 'package:data/res/components/custom_text_field.dart';
 import 'package:data/res/components/google_container.dart';
 import 'package:data/res/components/rounded_button.dart';
 import 'package:data/res/components/vertical_speacing.dart';
+import 'package:data/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,7 +53,14 @@ class RegisterScreen extends StatelessWidget {
               text: 'Confrom Password',
             ),
             const VerticalSpeacing(30),
-            RoundedButton(title: "Register", onpress: () {}),
+            RoundedButton(
+                title: "Register",
+                onpress: () {
+                  Navigator.pushNamed(
+                    context,
+                    RoutesName.home,
+                  );
+                }),
             const VerticalSpeacing(30),
             Text(
               "Or Continue With",
