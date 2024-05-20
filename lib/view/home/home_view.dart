@@ -111,7 +111,12 @@ class _HomeViewState extends State<HomeView> {
                       Column(
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                RoutesName.addFund,
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColor.buttonColor,
                               shape: RoundedRectangleBorder(

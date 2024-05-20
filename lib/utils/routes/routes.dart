@@ -3,6 +3,7 @@ import 'package:data/view/auth/forget_password.dart';
 import 'package:data/view/auth/login_view.dart';
 import 'package:data/view/auth/register_screen.dart';
 import 'package:data/view/auth/splash_view.dart';
+import 'package:data/view/home/add_fund/add_fund.dart';
 import 'package:data/view/home/all_subscribtions.dart';
 import 'package:data/view/home/home_view.dart';
 import 'package:data/view/withdrawFund/withdrawView.dart';
@@ -34,6 +35,9 @@ class Routes {
       case RoutesName.allSubscriptionView:
         return MaterialPageRoute(
             builder: (BuildContext context) => const AllSubscribtionsView());
+      case RoutesName.addFund:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const AddFund());
       case RoutesName.withdrawFund:
         return MaterialPageRoute(
             builder: (BuildContext context) => const WithdrawFundsView());

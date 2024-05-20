@@ -58,7 +58,7 @@ class ProfileScreen extends StatelessWidget {
                           shape: BoxShape.circle, color: AppColor.buttonColor),
                       child: const Center(
                           child: Icon(
-                        Icons.edit_attributes_outlined,
+                        Icons.edit_note_outlined,
                         color: AppColor.whiteColor,
                         size: 14,
                       )),
