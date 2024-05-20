@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:data/res/components/colors.dart';
+import 'package:data/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,6 +13,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
   void initState() {
     super.initState();
     startTimer();
@@ -19,21 +21,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void startTimer() {
     Timer(const Duration(seconds: 6), () async {
-      // if (FirebaseAuth.instance.currentUser != null) {
-      //   Navigator.pushAndRemoveUntil(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (c) => const MainScreen(),
-      //     ),
-      //     (route) => false,
-      //   );
-      // } else {
-      //   Navigator.pushAndRemoveUntil(
-      //     context,
-      //     MaterialPageRoute(builder: (c) => const LoginScreen()),
-      //     (route) => false,
-      //   );
-      // }
+      Navigator.pushNamed(
+        context,
+        RoutesName.logoIn,
+      );
     });
   }
 
