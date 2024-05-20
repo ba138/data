@@ -4,6 +4,7 @@ class RoutesName {
   static const String home = 'home_view';
   static const String register = 'Register_view';
   static const String forget = 'Forget_view';
+  static const String profile = 'Profile_view';
   static const String allSubscriptionView = 'all_subscribtions';
   static const String withdrawFund = 'with_draw_fund';
 }
