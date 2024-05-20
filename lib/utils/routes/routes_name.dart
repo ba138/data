@@ -7,4 +7,5 @@ class RoutesName {
   static const String profile = 'Profile_view';
   static const String allSubscriptionView = 'all_subscribtions';
   static const String addFund = 'add_fund_view';
+  static const String withdrawFund = 'with_draw_fund';
 }

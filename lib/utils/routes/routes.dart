@@ -6,6 +6,8 @@ import 'package:data/view/auth/splash_view.dart';
 import 'package:data/view/home/add_fund/add_fund.dart';
 import 'package:data/view/home/all_subscribtions.dart';
 import 'package:data/view/home/home_view.dart';
+import 'package:data/view/withdrawFund/withdrawView.dart';
+
 import 'package:data/view/profile/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +38,9 @@ class Routes {
       case RoutesName.addFund:
         return MaterialPageRoute(
             builder: (BuildContext context) => const AddFund());
+      case RoutesName.withdrawFund:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const WithdrawFundsView());
       default:
         return MaterialPageRoute(builder: (_) {
           return const Scaffold(

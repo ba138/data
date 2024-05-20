@@ -130,7 +130,10 @@ class _HomeViewState extends State<HomeView> {
                           ),
                           const VerticalSpeacing(16.0),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, RoutesName.withdrawFund);
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColor.whiteColor,
                               shape: RoundedRectangleBorder(
