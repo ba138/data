@@ -24,8 +24,7 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      initialRoute: RoutesName.splash,
-
+      initialRoute: RoutesName.home,
       onGenerateRoute: Routes.generateRoute,
     );
   }
