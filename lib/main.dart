@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'utils/routes/routes.dart';
+import 'utils/routes/routes_name.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -19,6 +22,8 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
+      initialRoute: RoutesName.home,
+      onGenerateRoute: Routes.generateRoute,
     );
   }
 }
