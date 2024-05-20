@@ -25,12 +25,15 @@ class _HomeViewState extends State<HomeView> {
                 painter: TrianglePainter(),
                 size: const Size(double.infinity, 262.0),
               ),
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Text 1', style: TextStyle(color: Colors.white)),
-                  Text('Text 2', style: TextStyle(color: Colors.white)),
-                ],
+              const Padding(
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('Text 1', style: TextStyle(color: Colors.white)),
+                    Text('Text 2', style: TextStyle(color: Colors.white)),
+                  ],
+                ),
               ),
             ],
           ),
