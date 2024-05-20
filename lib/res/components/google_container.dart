@@ -28,7 +28,7 @@ class _GoogleContainerState extends State<GoogleContainer> {
             child: Image.asset("images/google.png"),
           ),
           Text(
-            " sign in Google ",
+            "Continue with Google ",
             style: GoogleFonts.getFont(
               "Poppins",
               textStyle: const TextStyle(

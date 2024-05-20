@@ -51,25 +51,8 @@ class RegisterScreen extends StatelessWidget {
               maxLines: 1,
               text: 'Confrom Password',
             ),
-            const VerticalSpeacing(16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  "Forgot password",
-                  style: GoogleFonts.getFont(
-                    "Poppins",
-                    textStyle: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.whiteColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
             const VerticalSpeacing(30),
-            RoundedButton(title: "Login", onpress: () {}),
+            RoundedButton(title: "Register", onpress: () {}),
             const VerticalSpeacing(30),
             Text(
               "Or Continue With",
