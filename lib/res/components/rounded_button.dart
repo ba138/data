@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:data/res/components/colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RoundedButton extends StatelessWidget {
   final String title;
@@ -37,9 +38,13 @@ class RoundedButton extends StatelessWidget {
                 )
               : Text(
                   title,
-                  style: const TextStyle(
-                    color: AppColor.whiteColor,
-                    fontWeight: FontWeight.w600,
+                  style: GoogleFonts.getFont(
+                    "Poppins",
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: AppColor.whiteColor,
+                    ),
                   ),
                 ),
         ),

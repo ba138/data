@@ -1,5 +1,6 @@
 import 'package:data/res/components/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GoogleContainer extends StatefulWidget {
   const GoogleContainer({super.key});
@@ -16,10 +17,30 @@ class _GoogleContainerState extends State<GoogleContainer> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6), color: AppColor.buttonColor),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: 50,
-          )
+            width: 67,
+            decoration: BoxDecoration(
+                color: AppColor.whiteColor,
+                borderRadius: BorderRadius.circular(6)),
+            child: Image.asset("images/google.png"),
+          ),
+          Text(
+            " sign in Google ",
+            style: GoogleFonts.getFont(
+              "Poppins",
+              textStyle: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: AppColor.whiteColor,
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 30,
+          ),
         ],
       ),
     );
