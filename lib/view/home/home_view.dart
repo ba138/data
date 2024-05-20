@@ -71,27 +71,67 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
                   const VerticalSpeacing(14.0),
-                  Text(
-                    'Total Balance',
-                    style: GoogleFonts.getFont(
-                      "Poppins",
-                      textStyle: const TextStyle(
-                          color: AppColor.whiteColor,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  const VerticalSpeacing(5.0),
-                  Text(
-                    '\$140.00',
-                    style: GoogleFonts.getFont(
-                      "Poppins",
-                      textStyle: const TextStyle(
-                        color: AppColor.whiteColor,
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.w600,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            'Total Balance',
+                            style: GoogleFonts.getFont(
+                              "Poppins",
+                              textStyle: const TextStyle(
+                                  color: AppColor.whiteColor,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          const VerticalSpeacing(5.0),
+                          Text(
+                            '\$140.00',
+                            style: GoogleFonts.getFont(
+                              "Poppins",
+                              textStyle: const TextStyle(
+                                color: AppColor.whiteColor,
+                                fontSize: 40.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                      Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColor.buttonColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: const Text(
+                              'Add Fund',
+                              style: TextStyle(color: AppColor.whiteColor),
+                            ),
+                          ),
+                          const VerticalSpeacing(16.0),
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColor.whiteColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: const Text(
+                              'Withdraw',
+                              style: TextStyle(color: AppColor.blackColor),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -136,15 +176,15 @@ class _HomeViewState extends State<HomeView> {
         Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height /1.8,
-            child: SingleChildScrollView(
+            height: MediaQuery.of(context).size.height / 1.8,
+            child: const SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
                   SubscribtionCard(bgColor: Color(0xff3F30BD)),
-                  const VerticalSpeacing(16.0),
+                  VerticalSpeacing(16.0),
                   SubscribtionCard(bgColor: Color(0xff3B8FE9)),
-                  const VerticalSpeacing(16.0),
+                  VerticalSpeacing(16.0),
                   SubscribtionCard(bgColor: Color(0xff30BD82)),
                 ],
               ),
