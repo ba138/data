@@ -1,10 +1,11 @@
-import 'package:data/res/components/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:data/res/components/colors.dart';
 
 class RoundedButton extends StatelessWidget {
   final String title;
   final bool loading;
   final VoidCallback onpress;
+
   const RoundedButton({
     super.key,
     required this.title,
@@ -17,11 +18,17 @@ class RoundedButton extends StatelessWidget {
     return InkWell(
       onTap: onpress,
       child: Container(
-        height: 46.0,
-        width: 200.0,
+        height: 56.0,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(6.0),
           color: AppColor.buttonColor,
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xff613EEA).withOpacity(0.32),
+              blurRadius: 20,
+              offset: const Offset(0, 8), // changes position of shadow
+            ),
+          ],
         ),
         child: Center(
           child: loading
