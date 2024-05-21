@@ -131,8 +131,47 @@ class _AddFundState extends State<AddFund> {
                   text: 'Amount',
                   hintText: "150",
                 ),
-                const VerticalSpeacing(100),
-                RoundedButton(title: "Add Amount", onpress: () {})
+                const VerticalSpeacing(16),
+                Text(
+                  'Screen Shot',
+                  style: GoogleFonts.getFont(
+                    "Poppins",
+                    textStyle: const TextStyle(
+                      color: AppColor.whiteColor,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ),
+                const VerticalSpeacing(10),
+                Container(
+                  height: 113,
+                  width: 121,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff2B2C4E),
+
+                    borderRadius: BorderRadius.circular(4.0),
+                    // image: const DecorationImage(
+                    //   image: NetworkImage(
+                    //       'https://jmcp.edu.pk/wp-content/uploads/2023/09/jth-2.jpg'),
+                    //   fit: BoxFit.fill,
+                    // ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        // pickImage(isFirstImage: false);
+                      },
+                      icon: const Icon(
+                        Icons.upload_outlined,
+                        size: 60.0,
+                        color: AppColor.whiteColor,
+                      ),
+                    ),
+                  ),
+                ),
+                const VerticalSpeacing(80),
+                RoundedButton(title: "Add Amount", onpress: () {}),
+                const VerticalSpeacing(40),
               ],
             ),
           ),
