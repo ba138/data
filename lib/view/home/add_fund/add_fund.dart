@@ -47,8 +47,23 @@ class _AddFundState extends State<AddFund> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const VerticalSpeacing(16),
+                const TextFieldCustom(
+                  keyboardType: TextInputType.name,
+                  maxLines: 1,
+                  text: 'User Name',
+                  hintText: "Basit Ali",
+                ),
+                const VerticalSpeacing(16),
+                const TextFieldCustom(
+                  keyboardType: TextInputType.number,
+                  maxLines: 1,
+                  text: 'Phone',
+                  hintText: "+912345678",
+                ),
+                const VerticalSpeacing(16),
                 Text(
-                  'Admin banck details',
+                  'Admin bank details',
                   style: GoogleFonts.getFont(
                     "Poppins",
                     textStyle: const TextStyle(
@@ -73,10 +88,13 @@ class _AddFundState extends State<AddFund> {
                           color: AppColor.whiteColor,
                         ),
                       ),
-                      dropdownColor: Colors.transparent,
+                      dropdownColor: const Color(0xff191A2F),
                       value: selectPaymentType,
                       underline: const SizedBox(),
-                      icon: const Icon(Icons.expand_more_outlined),
+                      icon: const Icon(
+                        Icons.expand_more_outlined,
+                        color: AppColor.whiteColor,
+                      ),
                       iconSize: 24,
                       elevation: 16,
                       // Replace with your desired color
@@ -101,9 +119,17 @@ class _AddFundState extends State<AddFund> {
                 ),
                 const VerticalSpeacing(16),
                 const TextFieldCustom(
+                  keyboardType: TextInputType.number,
                   maxLines: 1,
                   text: 'Account Number',
                   hintText: "12345678",
+                ),
+                const VerticalSpeacing(16),
+                const TextFieldCustom(
+                  keyboardType: TextInputType.number,
+                  maxLines: 1,
+                  text: 'Amount',
+                  hintText: "150",
                 ),
                 const VerticalSpeacing(100),
                 RoundedButton(title: "Add Amount", onpress: () {})
