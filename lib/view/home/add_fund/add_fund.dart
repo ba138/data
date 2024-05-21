@@ -67,6 +67,7 @@ class _AddFundState extends State<AddFund> {
                   style: GoogleFonts.getFont(
                     "Poppins",
                     textStyle: const TextStyle(
+                      fontWeight: FontWeight.w400,
                       color: AppColor.whiteColor,
                       fontSize: 16.0,
                     ),
@@ -74,7 +75,7 @@ class _AddFundState extends State<AddFund> {
                 ),
                 const VerticalSpeacing(10),
                 Container(
-                  height: 42,
+                  height: 50,
                   color: const Color(0xff2B2C4E),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
