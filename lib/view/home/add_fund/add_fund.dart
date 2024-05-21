@@ -148,19 +148,11 @@ class _AddFundState extends State<AddFund> {
                   width: 121,
                   decoration: BoxDecoration(
                     color: const Color(0xff2B2C4E),
-
                     borderRadius: BorderRadius.circular(4.0),
-                    // image: const DecorationImage(
-                    //   image: NetworkImage(
-                    //       'https://jmcp.edu.pk/wp-content/uploads/2023/09/jth-2.jpg'),
-                    //   fit: BoxFit.fill,
-                    // ),
                   ),
                   child: Center(
                     child: IconButton(
-                      onPressed: () {
-                        // pickImage(isFirstImage: false);
-                      },
+                      onPressed: () {},
                       icon: const Icon(
                         Icons.upload_outlined,
                         size: 60.0,
