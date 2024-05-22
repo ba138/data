@@ -1,5 +1,6 @@
 import 'package:data/res/components/colors.dart';
 import 'package:data/res/components/vertical_speacing.dart';
+import 'package:data/utils/routes/routes_name.dart';
 import 'package:data/view/profile/widget/profile_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -104,12 +105,14 @@ class ProfileScreen extends StatelessWidget {
                   ontap: () {},
                   tColor: const Color(0xff46C5CA),
                   bColor: const Color(0xff6DF5FC),
-                  icon: Icons.notifications_outlined,
+                  icon: Icons.message_outlined,
                   trIcon: Icons.arrow_forward_ios,
-                  title: 'Notification'),
+                  title: 'My Messages'),
               const Divider(),
               ProfileWidgets(
-                  ontap: () {},
+                  ontap: () {
+                    Navigator.pushNamed(context, RoutesName.mySubscribtions);
+                  },
                   tColor: const Color(0xffA24ABF),
                   bColor: const Color(0xffDF9EF5),
                   icon: Icons.card_giftcard_outlined,
@@ -117,7 +120,9 @@ class ProfileScreen extends StatelessWidget {
                   title: 'My subscribtions'),
               const Divider(),
               ProfileWidgets(
-                  ontap: () {},
+                  ontap: () {
+                    Navigator.pushNamed(context, RoutesName.logoIn);
+                  },
                   tColor: const Color(0xffFF9CCB),
                   bColor: const Color(0xffEC4091),
                   icon: Icons.logout_outlined,
