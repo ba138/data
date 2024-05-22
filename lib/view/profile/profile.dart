@@ -94,7 +94,12 @@ class ProfileScreen extends StatelessWidget {
               ),
               const VerticalSpeacing(46),
               ProfileWidgets(
-                  ontap: () {},
+                  ontap: () {
+                    Navigator.pushNamed(
+                      context,
+                      RoutesName.myprofileview,
+                    );
+                  },
                   tColor: const Color(0xff40C269),
                   bColor: const Color(0xffCDFF9D),
                   icon: Icons.person_outline,

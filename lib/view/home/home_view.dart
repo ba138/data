@@ -50,7 +50,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                       ),
                       title: Text(
-                        'Alizay Khan',
+                        'Jwt Hiren',
                         style: GoogleFonts.getFont(
                           "Poppins",
                           textStyle: const TextStyle(
