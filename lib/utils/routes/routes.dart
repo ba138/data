@@ -7,6 +7,8 @@ import 'package:data/view/home/add_fund/add_fund.dart';
 import 'package:data/view/home/add_fund/add_fund_details.dart';
 import 'package:data/view/home/all_subscribtions.dart';
 import 'package:data/view/home/home_view.dart';
+import 'package:data/view/messages/my_messages.dart';
+import 'package:data/view/subscribtions/my_subscribtions.dart';
 import 'package:data/view/profile/edit_profile_view.dart';
 import 'package:data/view/profile/my_profile_view.dart';
 import 'package:data/view/withdrawFund/withdrawView.dart';
@@ -44,6 +46,9 @@ class Routes {
       case RoutesName.withdrawFund:
         return MaterialPageRoute(
             builder: (BuildContext context) => const WithdrawFundsView());
+      case RoutesName.mySubscribtions:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const MySubscribtions());
       case RoutesName.addfunddetails:
         return MaterialPageRoute(
             builder: (BuildContext context) => const AddFundDetails());
@@ -53,6 +58,9 @@ class Routes {
       case RoutesName.editprofileview:
         return MaterialPageRoute(
             builder: (BuildContext context) => const EditProfileView());
+      case RoutesName.mymessages:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const MyMessages());
       default:
         return MaterialPageRoute(builder: (_) {
           return const Scaffold(
