@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      initialRoute: RoutesName.home,
+      initialRoute: RoutesName.splash,
       onGenerateRoute: Routes.generateRoute,
     );
   }
