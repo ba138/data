@@ -66,15 +66,23 @@ class _HomeViewState extends State<HomeView> {
                         ),
                       ),
                     ),
-                    trailing: Container(
-                      height: 30,
-                      width: 30,
-                      decoration: const BoxDecoration(
-                          color: AppColor.whiteColor, shape: BoxShape.circle),
-                      child: const Center(
-                        child: Icon(
-                          Icons.notifications,
-                          color: AppColor.blackColor,
+                    trailing: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          RoutesName.myprofileview,
+                        );
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: const BoxDecoration(
+                            color: AppColor.whiteColor, shape: BoxShape.circle),
+                        child: const Center(
+                          child: Icon(
+                            Icons.notifications,
+                            color: AppColor.blackColor,
+                          ),
                         ),
                       ),
                     ),
@@ -114,7 +122,7 @@ class _HomeViewState extends State<HomeView> {
                             onPressed: () {
                               Navigator.pushNamed(
                                 context,
-                                RoutesName.addFund,
+                                RoutesName.addfunddetails,
                               );
                             },
                             style: ElevatedButton.styleFrom(
