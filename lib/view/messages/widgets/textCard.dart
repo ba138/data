@@ -12,9 +12,13 @@ class TextCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
-          color: const Color(0xff2B2C4E)),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(16.0),
+            bottomLeft: Radius.circular(16.0),
+            bottomRight: Radius.circular(16.0),
+          ),
+          color: Color(0xff2B2C4E)),
       child: Column(
         children: [
           Padding(
