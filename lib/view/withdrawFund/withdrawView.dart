@@ -102,7 +102,7 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
                       keyboardType: TextInputType.name,
                       maxLines: 1,
                       text: 'User Name',
-                      hintText: "Basit Ali",
+                      hintText: "Enter Your Name",
                     ),
                     const VerticalSpeacing(16),
                     Text(
@@ -166,7 +166,7 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
                       keyboardType: TextInputType.number,
                       maxLines: 1,
                       text: 'Account Number',
-                      hintText: "12345678",
+                      hintText: "*******",
                     ),
                     const VerticalSpeacing(16),
                     const TextFieldCustom(

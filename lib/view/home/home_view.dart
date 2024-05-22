@@ -114,7 +114,7 @@ class _HomeViewState extends State<HomeView> {
                             onPressed: () {
                               Navigator.pushNamed(
                                 context,
-                                RoutesName.addFund,
+                                RoutesName.addfunddetails,
                               );
                             },
                             style: ElevatedButton.styleFrom(

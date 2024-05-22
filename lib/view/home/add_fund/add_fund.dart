@@ -21,7 +21,7 @@ class _AddFundState extends State<AddFund> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Add fund details',
+          'Deposit Details',
           style: GoogleFonts.getFont(
             "Poppins",
             textStyle: const TextStyle(
@@ -145,8 +145,8 @@ class _AddFundState extends State<AddFund> {
                 ),
                 const VerticalSpeacing(10),
                 Container(
-                  height: 113,
-                  width: 121,
+                  height: 94,
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: const Color(0xff2B2C4E),
                     borderRadius: BorderRadius.circular(4.0),
@@ -163,7 +163,7 @@ class _AddFundState extends State<AddFund> {
                   ),
                 ),
                 const VerticalSpeacing(80),
-                RoundedButton(title: "Add Amount", onpress: () {}),
+                RoundedButton(title: "Deposite Amount", onpress: () {}),
                 const VerticalSpeacing(40),
               ],
             ),
