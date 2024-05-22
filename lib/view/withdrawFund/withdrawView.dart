@@ -101,12 +101,12 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
                     const TextFieldCustom(
                       keyboardType: TextInputType.name,
                       maxLines: 1,
-                      text: 'User Name',
+                      text: 'Account Holder Name',
                       hintText: "Enter Your Name",
                     ),
                     const VerticalSpeacing(16),
                     Text(
-                      'Select withdraw types',
+                      'Select Bank',
                       style: GoogleFonts.getFont(
                         "Poppins",
                         textStyle: const TextStyle(
