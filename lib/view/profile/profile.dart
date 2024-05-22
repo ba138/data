@@ -102,7 +102,9 @@ class ProfileScreen extends StatelessWidget {
                   title: 'My Profile'),
               const Divider(),
               ProfileWidgets(
-                  ontap: () {},
+                  ontap: () {
+                    Navigator.pushNamed(context, RoutesName.mymessages);
+                  },
                   tColor: const Color(0xff46C5CA),
                   bColor: const Color(0xff6DF5FC),
                   icon: Icons.message_outlined,

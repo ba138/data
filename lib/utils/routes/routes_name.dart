@@ -13,4 +13,5 @@ class RoutesName {
   static const String addfunddetails = 'add_fund_details';
   static const String myprofileview = 'my_profile_view';
   static const String editprofileview = 'edit_profile_view';
+  static const String mymessages = 'my_messages';
 }
