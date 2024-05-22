@@ -1,6 +1,5 @@
 import 'package:data/res/components/colors.dart';
 import 'package:data/res/components/vertical_speacing.dart';
-import 'package:data/utils/routes/routes_name.dart';
 import 'package:data/view/profile/widget/profile_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,56 +62,68 @@ class ProfileScreen extends StatelessWidget {
                         size: 14,
                       )),
                     ),
-                  )
+                  ),
                 ],
               ),
-              const VerticalSpeacing(24),
-              const ProfileTextField(
-                maxLines: 1,
-                text: "Full name",
-                hintText: "Basit Ali",
-              ),
-              const VerticalSpeacing(24),
-              const ProfileTextField(
-                maxLines: 1,
-                text: "Email address",
-                hintText: "BasitAlyShah51214@gmail.com",
-              ),
-              const VerticalSpeacing(24),
-              const ProfileTextField(
-                maxLines: 1,
-                text: "Phone number",
-                hintText: "123456789",
-              ),
-              const VerticalSpeacing(24),
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, RoutesName.logoIn, (route) => false);
-                },
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.logout_outlined,
-                      color: AppColor.whiteColor,
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Text(
-                      "Log Out",
-                      style: GoogleFonts.getFont(
-                        "Poppins",
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: AppColor.whiteColor,
-                        ),
+              const VerticalSpeacing(16.0),
+              Text.rich(
+                TextSpan(
+                    text: '  Hasnain Haider\n',
+                    style: GoogleFonts.getFont(
+                      "Poppins",
+                      textStyle: const TextStyle(
+                        color: AppColor.whiteColor,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
-                  ],
-                ),
-              )
+                    children: [
+                      TextSpan(
+                        text: 'hasnain@gmail.com',
+                        style: GoogleFonts.getFont(
+                          "Poppins",
+                          textStyle: const TextStyle(
+                            color: AppColor.whiteColor,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ]),
+              ),
+              const VerticalSpeacing(46),
+              ProfileWidgets(
+                  ontap: () {},
+                  tColor: const Color(0xff40C269),
+                  bColor: const Color(0xffCDFF9D),
+                  icon: Icons.person_outline,
+                  trIcon: Icons.arrow_forward_ios,
+                  title: 'My Profile'),
+              const Divider(),
+              ProfileWidgets(
+                  ontap: () {},
+                  tColor: const Color(0xff46C5CA),
+                  bColor: const Color(0xff6DF5FC),
+                  icon: Icons.notifications_outlined,
+                  trIcon: Icons.arrow_forward_ios,
+                  title: 'Notification'),
+              const Divider(),
+              ProfileWidgets(
+                  ontap: () {},
+                  tColor: const Color(0xffA24ABF),
+                  bColor: const Color(0xffDF9EF5),
+                  icon: Icons.card_giftcard_outlined,
+                  trIcon: Icons.arrow_forward_ios,
+                  title: 'My subscribtions'),
+              const Divider(),
+              ProfileWidgets(
+                  ontap: () {},
+                  tColor: const Color(0xffFF9CCB),
+                  bColor: const Color(0xffEC4091),
+                  icon: Icons.logout_outlined,
+                  trIcon: Icons.arrow_forward_ios,
+                  title: 'Log Out'),
+              const Divider(),
             ],
           ),
         ),
