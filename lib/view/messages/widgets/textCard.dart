@@ -22,7 +22,26 @@ class TextCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(left: 16.0, top: 12, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Today",
+                  style: GoogleFonts.getFont(
+                    "Poppins",
+                    textStyle: const TextStyle(
+                      color: AppColor.whiteColor,
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 12),
             child: Text(
               "Lorem ipsum dolor sit amet, consec.Lorem Lorem ipsum dolor sit amet, consec.Lorem Lorem ipsum dolor sit amet, consec.Lorem Lorem ipsum dolor sit amet, consec.Lorem",
               style: GoogleFonts.getFont(
