@@ -1,5 +1,6 @@
 import 'package:data/res/components/colors.dart';
 import 'package:data/res/components/vertical_speacing.dart';
+import 'package:data/utils/routes/routes_name.dart';
 import 'package:data/view/profile/widget/profile_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -93,7 +94,12 @@ class ProfileScreen extends StatelessWidget {
               ),
               const VerticalSpeacing(46),
               ProfileWidgets(
-                  ontap: () {},
+                  ontap: () {
+                    Navigator.pushNamed(
+                      context,
+                      RoutesName.myprofileview,
+                    );
+                  },
                   tColor: const Color(0xff40C269),
                   bColor: const Color(0xffCDFF9D),
                   icon: Icons.person_outline,
