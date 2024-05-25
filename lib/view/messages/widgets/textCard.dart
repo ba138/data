@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../res/components/colors.dart';
+import '../../../Res/components/colors.dart';
 
 class TextCard extends StatelessWidget {
   const TextCard({

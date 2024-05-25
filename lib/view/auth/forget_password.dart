@@ -1,7 +1,7 @@
-import 'package:data/res/components/colors.dart';
-import 'package:data/res/components/custom_text_field.dart';
-import 'package:data/res/components/rounded_button.dart';
-import 'package:data/res/components/vertical_speacing.dart';
+import 'package:data/Res/components/colors.dart';
+import 'package:data/Res/components/custom_text_field.dart';
+import 'package:data/Res/components/rounded_button.dart';
+import 'package:data/Res/components/vertical_speacing.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

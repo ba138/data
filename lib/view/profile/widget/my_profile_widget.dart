@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:data/res/components/colors.dart';
-import 'package:data/res/components/vertical_speacing.dart';
+import 'package:data/Res/components/colors.dart';
+import 'package:data/Res/components/vertical_speacing.dart';
 
 class MyProfileWidget extends StatelessWidget {
   const MyProfileWidget({

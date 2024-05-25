@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "249523149804",
+    "project_id": "wallet-app-f5ba0",
+    "storage_bucket": "wallet-app-f5ba0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249523149804:android:eda3708db86d2d791c3ec9",
+        "android_client_info": {
+          "package_name": "com.walletApp.data"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNG16PlcTZBXU5CBnbpAtdT01Ci3yDBIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

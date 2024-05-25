@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../res/components/colors.dart';
+import '../../../Res/components/colors.dart';
 
 class ProfileWidgets extends StatelessWidget {
   const ProfileWidgets({
