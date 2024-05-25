@@ -26,17 +26,20 @@ class AllSubscribtionsView extends StatelessWidget {
       ),
       body: const Padding(
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        child: Column(
-          children: [
-            VerticalSpeacing(30.0),
-            SubscribtionCard(bgColor: Color(0xff3F30BD)),
-            VerticalSpeacing(16.0),
-            SubscribtionCard(bgColor: Color(0xff3B8FE9)),
-            VerticalSpeacing(16.0),
-            SubscribtionCard(bgColor: Color(0xff30BD82)),
-            VerticalSpeacing(16.0),
-            SubscribtionCard(bgColor: Color(0xff30BD82)),
-          ],
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              VerticalSpeacing(30.0),
+              SubscribtionCard(bgColor: Color(0xff3F30BD)),
+              VerticalSpeacing(16.0),
+              SubscribtionCard(bgColor: Color(0xff3B8FE9)),
+              VerticalSpeacing(16.0),
+              SubscribtionCard(bgColor: Color(0xff30BD82)),
+              VerticalSpeacing(16.0),
+              SubscribtionCard(bgColor: Color(0xff30BD82)),
+            ],
+          ),
         ),
       ),
     );
