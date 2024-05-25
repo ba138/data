@@ -3,8 +3,17 @@ import 'package:data/Res/components/vertical_speacing.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:data/res/components/colors.dart';
+import 'package:data/res/components/vertical_speacing.dart';
+
 class FundTile extends StatelessWidget {
-  const FundTile({super.key});
+  final String title;
+  final String subTitle;
+  const FundTile({
+    Key? key,
+    required this.title,
+    required this.subTitle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,22 +21,22 @@ class FundTile extends StatelessWidget {
       children: [
         ListTile(
           title: Text(
-            'UPI',
-            style: GoogleFonts.getFont(
-              "Poppins",
-              textStyle: const TextStyle(
-                  color: AppColor.whiteColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
-            ),
-          ),
-          subtitle: Text(
-            '2345895432398543456977888',
+            title,
             style: GoogleFonts.getFont(
               "Poppins",
               textStyle: const TextStyle(
                   color: AppColor.whiteColor,
                   fontSize: 14,
+                  fontWeight: FontWeight.w400),
+            ),
+          ),
+          subtitle: Text(
+            subTitle,
+            style: GoogleFonts.getFont(
+              "Poppins",
+              textStyle: const TextStyle(
+                  color: AppColor.whiteColor,
+                  fontSize: 16,
                   fontWeight: FontWeight.w400),
             ),
           ),
@@ -37,10 +46,6 @@ class FundTile extends StatelessWidget {
                 Icons.copy,
                 color: AppColor.whiteColor,
               )),
-        ),
-        const VerticalSpeacing(8),
-        const Divider(
-          color: AppColor.whiteColor,
         ),
       ],
     );

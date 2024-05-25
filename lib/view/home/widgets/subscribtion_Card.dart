@@ -1,3 +1,4 @@
+import 'package:data/utils/routes/routes_name.dart';
 import 'package:data/view/home/widgets/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -81,7 +82,10 @@ class SubscribtionCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, RoutesName.mySubscribtions);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColor.whiteColor,
                           shape: RoundedRectangleBorder(
