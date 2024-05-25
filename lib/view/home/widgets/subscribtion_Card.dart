@@ -3,8 +3,8 @@ import 'package:data/view/home/widgets/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../res/components/colors.dart';
-import '../../../res/components/vertical_speacing.dart';
+import '../../../Res/components/colors.dart';
+import '../../../Res/components/vertical_speacing.dart';
 
 class SubscribtionCard extends StatelessWidget {
   const SubscribtionCard({

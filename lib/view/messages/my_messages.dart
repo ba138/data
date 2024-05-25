@@ -1,8 +1,8 @@
-import 'package:data/res/components/vertical_speacing.dart';
+import 'package:data/Res/components/vertical_speacing.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../res/components/colors.dart';
+import '../../Res/components/colors.dart';
 import 'widgets/textCard.dart';
 
 class MyMessages extends StatelessWidget {

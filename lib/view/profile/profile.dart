@@ -1,5 +1,5 @@
-import 'package:data/res/components/colors.dart';
-import 'package:data/res/components/vertical_speacing.dart';
+import 'package:data/Res/components/colors.dart';
+import 'package:data/Res/components/vertical_speacing.dart';
 import 'package:data/utils/routes/routes_name.dart';
 import 'package:data/view/profile/widget/profile_text_field.dart';
 import 'package:flutter/material.dart';
