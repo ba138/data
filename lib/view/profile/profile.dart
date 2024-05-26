@@ -1,12 +1,72 @@
-import 'package:data/res/components/colors.dart';
-import 'package:data/res/components/vertical_speacing.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:data/Res/components/colors.dart';
+import 'package:data/Res/components/vertical_speacing.dart';
 import 'package:data/utils/routes/routes_name.dart';
 import 'package:data/view/profile/widget/profile_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../../utils/routes/utils.dart';
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final authInstance = FirebaseAuth.instance;
+  String? _email;
+  String? _name;
+  String? address;
+  String? _pImage;
+  bool _isLoading = false;
+  final User? user = FirebaseAuth.instance.currentUser;
+  String defaultProfile =
+      'https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg';
+  @override
+  void initState() {
+    getUserData();
+    super.initState();
+  }
+
+  Future<void> getUserData() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final googleAuth = FirebaseAuth.instance.currentUser;
+    _name = googleAuth?.displayName ?? 'You';
+    _email = googleAuth?.email ?? 'ID: 5788478';
+    _pImage = googleAuth?.photoURL ?? defaultProfile;
+    setState(() {
+      _isLoading = false;
+    });
+    if (user != null) {
+      try {
+        String _uid = user!.uid;
+        final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(_uid)
+            .get();
+        if (userDoc != null || userDoc.data() != null) {
+          _email = userDoc.get('email');
+          _name = userDoc.get('name');
+          _pImage = userDoc.get('profilePic');
+        }
+      } catch (error) {
+        setState(() {
+          _isLoading = false;
+        });
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +102,12 @@ class ProfileScreen extends StatelessWidget {
               const VerticalSpeacing(10),
               Stack(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 40,
                     backgroundColor: AppColor.whiteColor,
                     backgroundImage: NetworkImage(
-                        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+                      _pImage ?? defaultProfile,
+                    ),
                   ),
                   Positioned(
                     bottom: 0,
@@ -69,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
               const VerticalSpeacing(16.0),
               Text.rich(
                 TextSpan(
-                    text: '  Hasnain Haider\n',
+                    text: '${_name ?? 'Default Name'}\n',
                     style: GoogleFonts.getFont(
                       "Poppins",
                       textStyle: const TextStyle(
@@ -80,7 +141,9 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: 'hasnain@gmail.com',
+                        text: _email!.length > 12
+                            ? "${_email!.substring(0, 12)}..."
+                            : _email ?? 'Default Email',
                         style: GoogleFonts.getFont(
                           "Poppins",
                           textStyle: const TextStyle(
@@ -127,8 +190,11 @@ class ProfileScreen extends StatelessWidget {
                   title: 'My subscribtions'),
               const Divider(),
               ProfileWidgets(
-                  ontap: () {
-                    Navigator.pushNamed(context, RoutesName.logoIn);
+                  ontap: () async {
+                    authInstance.signOut();
+                    Utils.toastMessage('SuccessFully LogOut');
+                    await Navigator.pushNamedAndRemoveUntil(
+                        context, RoutesName.logoIn, (route) => false);
                   },
                   tColor: const Color(0xffFF9CCB),
                   bColor: const Color(0xffEC4091),

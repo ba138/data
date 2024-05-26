@@ -1,10 +1,10 @@
-import 'package:data/res/components/custom_text_field.dart';
-import 'package:data/res/components/rounded_button.dart';
+import 'package:data/Res/components/custom_text_field.dart';
+import 'package:data/Res/components/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../res/components/colors.dart';
-import '../../res/components/vertical_speacing.dart';
+import '../../Res/components/colors.dart';
+import '../../Res/components/vertical_speacing.dart';
 import '../home/widgets/trianglePainter.dart';
 
 class WithdrawFundsView extends StatefulWidget {
