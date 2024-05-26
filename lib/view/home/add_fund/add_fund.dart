@@ -84,7 +84,8 @@ class _AddFundState extends State<AddFund> {
         "amount": balanceController.text,
         "userId": userId,
         "uuid": uuid,
-        "slipImageUrl": imageUrl, // Store image URL instead of the image object
+        "slipImageUrl": imageUrl,
+        "createdAt": DateTime.now(),
       };
 
       await fireStore.doc(uuid).set(depositeData);
