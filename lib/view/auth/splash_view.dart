@@ -1,5 +1,6 @@
-import 'dart:async';
+// ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/Res/components/colors.dart';
 import 'package:data/utils/routes/routes_name.dart';
