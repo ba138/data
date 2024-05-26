@@ -18,8 +18,8 @@ class AllSubscribtionsView extends StatefulWidget {
 class _AllSubscribtionsViewState extends State<AllSubscribtionsView> {
   final _firestoreInstance = FirebaseFirestore.instance;
   final List _allsubscrbtions = [];
+  String subscribtionStatus = 'Subscribe';
   bool _isLoading = false;
-  final String subscribtionStatus = 'pending';
   fetchallSubscribtions() async {
     try {
       setState(() {
