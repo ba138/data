@@ -30,9 +30,28 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
   final User? user = FirebaseAuth.instance.currentUser;
 
   void withDrawFun() async {
+    if (nameController.text.isEmpty ||
+        accountController.text.isEmpty ||
+        amountController.text.isEmpty) {
+      Utils.toastMessage('Please fill all the fields');
+      return;
+    }
+
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      Utils.flushBarErrorMessage('please login first', context);
+      return;
+    }
     setState(() {
       _isLoading = true;
     });
+
+    final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+
+    final totalBalance = userDoc.get('balance') ?? 0;
 
     try {
       var uuid = const Uuid().v1();
@@ -42,10 +61,11 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
             .collection('withdraw_requests')
             .doc(uuid)
             .set({
+          'Total Balance': totalBalance,
           'AccountHolderName': nameController.text,
           'PaymentType': selectPaymentType,
           'AccountNumber': accountController.text,
-          'balance': amountController.text,
+          'Request blance': amountController.text,
           'uuId': uuid,
           'currentUserId': currentuser.uid,
           'date': DateTime.now(),
@@ -53,7 +73,7 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
         Navigator.pushNamedAndRemoveUntil(
             context, RoutesName.home, (route) => false);
 
-        Utils.toastMessage('Successfully added to cart');
+        Utils.toastMessage('Successfully Submit Request');
       } else {
         Utils.toastMessage('No current user found');
       }

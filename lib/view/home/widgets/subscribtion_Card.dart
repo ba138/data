@@ -13,12 +13,14 @@ class SubscribtionCard extends StatelessWidget {
     required this.date,
     required this.duration,
     required this.ontapSubscribe,
+    required this.subscribtionStatus,
   });
   final Color bgColor;
   final String charge;
   final String date;
   final String duration;
   final Function ontapSubscribe;
+  final String subscribtionStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -98,13 +100,13 @@ class SubscribtionCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        child: const Text(
-                          'Subscribe',
-                          style: TextStyle(color: AppColor.buttonColor),
+                        child: Text(
+                          subscribtionStatus,
+                          style: const TextStyle(color: AppColor.buttonColor),
                         ),
                       ),
                       Text(
-                        date,
+                        date.toString(),
                         style: GoogleFonts.getFont(
                           "Poppins",
                           textStyle: const TextStyle(

@@ -1,12 +1,23 @@
 import 'package:data/Res/components/vertical_speacing.dart';
-import 'package:data/view/subscribtions/widgets/mysubscribtionCard.dart';
+import 'package:data/utils/routes/routes_name.dart';
+import 'package:data/view/home/widgets/subscribtion_Card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../Res/components/colors.dart';
 
 class MySubscribtions extends StatelessWidget {
-  const MySubscribtions({super.key});
+  const MySubscribtions({
+    super.key,
+    required this.duration,
+    required this.subscrintionCharges,
+    required this.subscrintionStatus,
+    required this.date,
+  });
+  final String duration;
+  final String subscrintionCharges;
+  final String subscrintionStatus;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +40,7 @@ class MySubscribtions extends StatelessWidget {
             color: AppColor.whiteColor,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, RoutesName.home);
           },
         ),
       ),
@@ -39,7 +50,15 @@ class MySubscribtions extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const VerticalSpeacing(30.0),
-            const MySubscribtionCard(bgColor: AppColor.buttonColor),
+            SubscribtionCard(
+              bgColor: AppColor.buttonColor,
+              charge: subscrintionCharges,
+              date: date,
+              duration: duration,
+              ontapSubscribe: () {},
+              subscribtionStatus: subscrintionStatus,
+            ),
+            // const MySubscribtionCard(bgColor: AppColor.buttonColor),
             const VerticalSpeacing(46.0),
             Center(
               child: Text.rich(
@@ -80,7 +99,7 @@ class MySubscribtions extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  '6 month regular use',
+                  '$duration regular use',
                   style: GoogleFonts.getFont(
                     "Poppins",
                     textStyle: const TextStyle(
