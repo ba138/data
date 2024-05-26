@@ -1,7 +1,6 @@
 import 'package:data/Res/components/vertical_speacing.dart';
 import 'package:data/view/subscribtions/widgets/mysubscribtionCard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../Res/components/colors.dart';
