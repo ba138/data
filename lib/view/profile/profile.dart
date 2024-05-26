@@ -71,6 +71,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  Future<void> showBlockedPopup(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Subscribed user"),
+          content: const Text(
+              "you are not a subscribed user Please subscribed first."),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> checkUserCategory(BuildContext context) async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      if (userDoc.exists) {
+        // Cast the data to Map<String, dynamic>
+        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+
+        // Check if the field "Normal" exists in the document
+        if (userData.containsKey('Normal')) {
+          if (userData['Normal'].isNotEmpty) {
+            setState(() {
+              showBlockedPopup(context);
+            });
+          } else {
+            await Navigator.pushNamed(context, RoutesName.mymessages);
+          }
+        } else {
+          await Navigator.pushNamed(context, RoutesName.mymessages);
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,8 +226,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: 'My Profile'),
                 const Divider(),
                 ProfileWidgets(
-                    ontap: () {
-                      Navigator.pushNamed(context, RoutesName.mymessages);
+                    ontap: () async {
+                      await checkUserCategory(context);
                     },
                     tColor: const Color(0xff46C5CA),
                     bColor: const Color(0xff6DF5FC),
