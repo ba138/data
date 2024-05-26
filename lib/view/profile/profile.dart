@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/Res/components/colors.dart';
 import 'package:data/Res/components/loading_manager.dart';
