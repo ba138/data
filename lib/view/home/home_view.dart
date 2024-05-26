@@ -5,7 +5,6 @@ import 'package:data/Res/components/colors.dart';
 import 'package:data/Res/components/loading_manager.dart';
 import 'package:data/Res/components/vertical_speacing.dart';
 import 'package:data/utils/routes/routes_name.dart';
-import 'package:data/view/subscribtions/my_subscribtions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
