@@ -53,7 +53,7 @@ class _AddFundDetailsState extends State<AddFundDetails> {
         }
       });
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     } finally {
       setState(() {
         _isLoading = false;
