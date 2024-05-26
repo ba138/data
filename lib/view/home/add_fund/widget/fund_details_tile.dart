@@ -5,10 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 class FundTile extends StatelessWidget {
   final String title;
   final String subTitle;
+  final Function onCopy;
   const FundTile({
     Key? key,
     required this.title,
     required this.subTitle,
+    required this.onCopy,
   }) : super(key: key);
 
   @override
@@ -37,7 +39,9 @@ class FundTile extends StatelessWidget {
             ),
           ),
           trailing: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                onCopy();
+              },
               icon: const Icon(
                 Icons.copy,
                 color: AppColor.whiteColor,

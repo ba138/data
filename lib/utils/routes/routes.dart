@@ -36,7 +36,7 @@ class Routes {
             builder: (BuildContext context) => const ForgetPasswordScreen());
       case RoutesName.profile:
         return MaterialPageRoute(
-            builder: (BuildContext context) => ProfileScreen());
+            builder: (BuildContext context) => const ProfileScreen());
       case RoutesName.allSubscriptionView:
         return MaterialPageRoute(
             builder: (BuildContext context) => const AllSubscribtionsView());
