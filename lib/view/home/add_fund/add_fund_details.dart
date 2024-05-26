@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/Res/components/rounded_button.dart';
 import 'package:data/utils/routes/routes_name.dart';
+import 'package:data/utils/routes/utils.dart';
 import 'package:data/view/home/add_fund/widget/fund_details_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddFundDetails extends StatefulWidget {
@@ -67,102 +69,119 @@ class _AddFundDetailsState extends State<AddFundDetails> {
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 50,
-                  color: const Color(0xff2B2C4E),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: DropdownButton<String>(
-                      isExpanded: true,
-                      style: GoogleFonts.getFont(
-                        "Poppins",
-                        textStyle: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
+          : Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 50,
+                    color: const Color(0xff2B2C4E),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        style: GoogleFonts.getFont(
+                          "Poppins",
+                          textStyle: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white, // Use the color directly
+                          ),
+                        ),
+                        dropdownColor: const Color(0xff191A2F),
+                        value: _selectedBankName,
+                        underline: const SizedBox(),
+                        icon: const Icon(
+                          Icons.expand_more_outlined,
                           color: Colors.white, // Use the color directly
                         ),
+                        iconSize: 24,
+                        elevation: 16,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedBankName = newValue!;
+                            _selectedBankDetail = _bankDetails.firstWhere(
+                                (element) => element['bankName'] == newValue);
+                          });
+                        },
+                        items: _bankDetails.map<DropdownMenuItem<String>>(
+                            (Map<String, dynamic> value) {
+                          return DropdownMenuItem<String>(
+                            value: value['bankName'],
+                            child: Text(value['bankName']),
+                          );
+                        }).toList(),
                       ),
-                      dropdownColor: const Color(0xff191A2F),
-                      value: _selectedBankName,
-                      underline: const SizedBox(),
-                      icon: const Icon(
-                        Icons.expand_more_outlined,
-                        color: Colors.white, // Use the color directly
-                      ),
-                      iconSize: 24,
-                      elevation: 16,
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          _selectedBankName = newValue!;
-                          _selectedBankDetail = _bankDetails.firstWhere(
-                              (element) => element['bankName'] == newValue);
-                        });
-                      },
-                      items: _bankDetails.map<DropdownMenuItem<String>>(
-                          (Map<String, dynamic> value) {
-                        return DropdownMenuItem<String>(
-                          value: value['bankName'],
-                          child: Text(value['bankName']),
-                        );
-                      }).toList(),
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Please make the payment mention below',
-                  style: GoogleFonts.getFont(
-                    "Poppins",
-                    textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  height: MediaQuery.of(context).size.height / 2.4,
-                  color: const Color(0xff2B2C4E),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Column(
-                      children: [
-                        FundTile(
-                          title: 'Beneficiary Name',
-                          subTitle:
-                              _selectedBankDetail?['accountHolderName'] ?? '',
-                          onCopy: () {},
-                        ),
-                        const SizedBox(height: 16),
-                        FundTile(
-                          title: 'Bank Name',
-                          subTitle: _selectedBankDetail?['bankName'] ?? '',
-                          onCopy: () {},
-                        ),
-                        const SizedBox(height: 16),
-                        FundTile(
-                          title: 'Account Number',
-                          subTitle: _selectedBankDetail?['accountNumber'] ?? '',
-                          onCopy: () {},
-                        ),
-                      ],
+                  const SizedBox(height: 16),
+                  Text(
+                    'Please make the payment mention below',
+                    style: GoogleFonts.getFont(
+                      "Poppins",
+                      textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
                     ),
                   ),
-                ),
-                const SizedBox(height: 30),
-                RoundedButton(
-                  title: "Add Fund Details",
-                  onpress: () {
-                    Navigator.pushNamed(
-                      context,
-                      RoutesName.addFund,
-                    );
-                  },
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 2.4,
+                    color: const Color(0xff2B2C4E),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: Column(
+                        children: [
+                          FundTile(
+                            title: 'Beneficiary Name',
+                            subTitle:
+                                _selectedBankDetail?['accountHolderName'] ?? '',
+                            onCopy: () {
+                              Clipboard.setData(ClipboardData(
+                                  text: _selectedBankDetail?[
+                                      'accountHolderName']));
+                              Utils.toastMessage("Text copied to clipboard");
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          FundTile(
+                            title: 'Bank Name',
+                            subTitle: _selectedBankDetail?['bankName'] ?? '',
+                            onCopy: () {
+                              Clipboard.setData(ClipboardData(
+                                  text: _selectedBankDetail?['bankName']));
+                              Utils.toastMessage("Text copied to clipboard");
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          FundTile(
+                            title: 'Account Number',
+                            subTitle:
+                                _selectedBankDetail?['accountNumber'] ?? '',
+                            onCopy: () {
+                              Clipboard.setData(ClipboardData(
+                                  text: _selectedBankDetail?['accountNumber']));
+                              Utils.toastMessage("Text copied to clipboard");
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  RoundedButton(
+                    title: "Add Fund Details",
+                    onpress: () {
+                      Navigator.pushNamed(
+                        context,
+                        RoutesName.addFund,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
     );
   }
