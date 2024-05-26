@@ -10,8 +10,16 @@ class SubscribtionCard extends StatelessWidget {
   const SubscribtionCard({
     super.key,
     required this.bgColor,
+    required this.charge,
+    required this.date,
+    required this.duration,
+    required this.ontapSubscribe,
   });
   final Color bgColor;
+  final String charge;
+  final String date;
+  final String duration;
+  final Function ontapSubscribe;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +60,7 @@ class SubscribtionCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '6 month',
+                      duration,
                       style: GoogleFonts.getFont(
                         "Poppins",
                         textStyle: const TextStyle(
@@ -64,7 +72,7 @@ class SubscribtionCard extends StatelessWidget {
                     ),
                     const VerticalSpeacing(30.0),
                     Text(
-                      '\$3500',
+                      '₹$charge',
                       style: GoogleFonts.getFont(
                         "Poppins",
                         textStyle: const TextStyle(
@@ -83,8 +91,7 @@ class SubscribtionCard extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, RoutesName.mySubscribtions);
+                          ontapSubscribe();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColor.whiteColor,
@@ -98,7 +105,7 @@ class SubscribtionCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Exp-23/12/2024',
+                        date,
                         style: GoogleFonts.getFont(
                           "Poppins",
                           textStyle: const TextStyle(

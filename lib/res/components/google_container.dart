@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../utils/routes/utils.dart';
 
+// ignore: must_be_immutable
 class GoogleContainer extends StatefulWidget {
   GoogleContainer({super.key, required this.isLoading});
   bool isLoading;
@@ -55,13 +56,19 @@ class _GoogleContainerState extends State<GoogleContainer> {
     }
   }
 
+  bool isblock = false;
+  num balance = 0.0;
+  final String category = 'Normal';
   Future<void> _setupUserData(User user) async {
     await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
       'createdAt': FieldValue.serverTimestamp(),
       'email': user.email,
       'id': user.uid,
       'name': user.displayName,
+      'isBlock': isblock,
+      'balance': balance,
       'profilePic': user.photoURL,
+      'category': category,
     });
   }
 

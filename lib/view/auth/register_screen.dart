@@ -35,6 +35,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     phoneController.dispose();
   }
 
+  bool isblock = false;
+  num balance = 0.0;
+  final String category = 'Normal';
   bool _isLoading = false;
   final authInstance = FirebaseAuth.instance;
   void _submitFormOnRegister() async {
@@ -56,6 +59,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'name': nameController.text,
           'email': emailController.text.toLowerCase(),
           'phone': phoneController.text,
+          'isBlock': isblock,
+          'balance': balance,
+          'category': category,
           'createdAt': Timestamp.now(),
         });
         Navigator.pushNamedAndRemoveUntil(
