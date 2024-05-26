@@ -84,8 +84,6 @@ class _HomeViewState extends State<HomeView> {
             _pImage = userDoc.get('profilePic') ?? defaultProfile;
           });
         }
-      } catch (error) {
-        Utils.flushBarErrorMessage(error.toString(), context);
       } finally {
         setState(() {
           _isLoading = false;

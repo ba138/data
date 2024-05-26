@@ -26,6 +26,8 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
   TextEditingController amountController = TextEditingController();
   String selectPaymentType = "UPI Bank";
   bool _isLoading = false;
+  num? _totalAmount;
+  final User? user = FirebaseAuth.instance.currentUser;
 
   void withDrawFun() async {
     setState(() {
@@ -37,15 +39,13 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
       final currentuser = FirebaseAuth.instance.currentUser;
       if (currentuser != null) {
         await FirebaseFirestore.instance
-            .collection('users')
-            .doc(currentuser.uid)
             .collection('withdraw_requests')
             .doc(uuid)
             .set({
           'AccountHolderName': nameController.text,
           'PaymentType': selectPaymentType,
           'AccountNumber': accountController.text,
-          'Amount': amountController.text,
+          'balance': amountController.text,
           'uuId': uuid,
           'currentUserId': currentuser.uid,
           'date': DateTime.now(),
@@ -123,17 +123,43 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
                                     ),
                                   ),
                                   const VerticalSpeacing(5.0),
-                                  Text(
-                                    '\$140.00',
-                                    style: GoogleFonts.getFont(
-                                      "Poppins",
-                                      textStyle: const TextStyle(
-                                        color: AppColor.whiteColor,
-                                        fontSize: 40.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
+                                  StreamBuilder<DocumentSnapshot>(
+                                      stream: FirebaseFirestore.instance
+                                          .collection('users')
+                                          .doc(user?.uid)
+                                          .snapshots(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const CircularProgressIndicator();
+                                        }
+                                        if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        }
+                                        if (!snapshot.hasData ||
+                                            !snapshot.data!.exists) {
+                                          return const Text('N/A');
+                                        }
+
+                                        final userDoc = snapshot.data!;
+                                        _totalAmount =
+                                            userDoc.get('balance') ?? 0;
+
+                                        return Text(
+                                          _totalAmount != null
+                                              ? '₹$_totalAmount'
+                                              : 'N/A',
+                                          style: GoogleFonts.getFont(
+                                            "Poppins",
+                                            textStyle: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 30.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        );
+                                      }),
                                 ],
                               ),
                             ],
