@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/Res/components/colors.dart';
 import 'package:data/Res/components/loading_manager.dart';
 import 'package:data/Res/components/vertical_speacing.dart';
 import 'package:data/utils/routes/routes_name.dart';
+import 'package:data/utils/routes/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'widgets/subscribtion_Card.dart';
@@ -48,10 +52,52 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
+  final authInstance = FirebaseAuth.instance;
+  String? _name;
+  String? _pImage;
+  num? _totalAmount;
+  final User? user = FirebaseAuth.instance.currentUser;
+  String defaultProfile =
+      'https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg';
+
+  Future<void> getUserData() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final googleAuth = FirebaseAuth.instance.currentUser;
+    _name = googleAuth?.displayName ?? 'You';
+    _pImage = googleAuth?.photoURL ?? defaultProfile;
+    setState(() {
+      _isLoading = false;
+    });
+    if (user != null) {
+      try {
+        String _uid = user!.uid;
+        final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(_uid)
+            .get();
+        if (userDoc.exists) {
+          setState(() {
+            _name = userDoc.get('name') ?? 'You';
+            _pImage = userDoc.get('profilePic') ?? defaultProfile;
+          });
+        }
+      } catch (error) {
+        Utils.flushBarErrorMessage(error.toString(), context);
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
   @override
   void initState() {
     fetchSubscribtions();
-
+    getUserData();
     super.initState();
   }
 
@@ -86,14 +132,15 @@ class _HomeViewState extends State<HomeView> {
                               RoutesName.profile,
                             );
                           },
-                          child: const CircleAvatar(
+                          child: CircleAvatar(
                             radius: 40.0,
                             backgroundImage: NetworkImage(
-                                'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                              _pImage ?? defaultProfile,
+                            ),
                           ),
                         ),
                         title: Text(
-                          'Jwt Hiren',
+                          _name ?? 'Default Name',
                           style: GoogleFonts.getFont(
                             "Poppins",
                             textStyle: const TextStyle(
@@ -127,17 +174,41 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               ),
                               const VerticalSpeacing(5.0),
-                              Text(
-                                '\$140.00',
-                                style: GoogleFonts.getFont(
-                                  "Poppins",
-                                  textStyle: const TextStyle(
-                                    color: AppColor.whiteColor,
-                                    fontSize: 40.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
+                              StreamBuilder<DocumentSnapshot>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(user?.uid)
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return const CircularProgressIndicator();
+                                    }
+                                    if (snapshot.hasError) {
+                                      return Text('Error: ${snapshot.error}');
+                                    }
+                                    if (!snapshot.hasData ||
+                                        !snapshot.data!.exists) {
+                                      return const Text('N/A');
+                                    }
+
+                                    final userDoc = snapshot.data!;
+                                    _totalAmount = userDoc.get('balance') ?? 0;
+
+                                    return Text(
+                                      _totalAmount != null
+                                          ? '₹$_totalAmount'
+                                          : 'N/A',
+                                      style: GoogleFonts.getFont(
+                                        "Poppins",
+                                        textStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 30.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    );
+                                  }),
                             ],
                           ),
                           Column(
