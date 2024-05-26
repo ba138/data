@@ -185,7 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const Divider(),
                 ProfileWidgets(
                     ontap: () {
-                      Navigator.pushNamed(context, RoutesName.mySubscribtions);
+                      // Navigator.pushNamed(context, RoutesName.mySubscribtions);
                     },
                     tColor: const Color(0xffA24ABF),
                     bColor: const Color(0xffDF9EF5),

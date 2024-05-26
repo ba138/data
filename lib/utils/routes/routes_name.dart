@@ -8,7 +8,7 @@ class RoutesName {
   static const String allSubscriptionView = 'all_subscribtions';
   static const String addFund = 'add_fund_view';
   static const String withdrawFund = 'with_draw_fund';
-  static const String mySubscribtions = 'my_subscribtions';
+  // static const String mySubscribtions = 'my_subscribtions';
 
   static const String addfunddetails = 'add_fund_details';
   static const String myprofileview = 'my_profile_view';

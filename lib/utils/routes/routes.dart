@@ -46,9 +46,9 @@ class Routes {
       case RoutesName.withdrawFund:
         return MaterialPageRoute(
             builder: (BuildContext context) => const WithdrawFundsView());
-      case RoutesName.mySubscribtions:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => const MySubscribtions());
+      // case RoutesName.mySubscribtions:
+      //   return MaterialPageRoute(
+      //       builder: (BuildContext context) => const MySubscribtions());
       case RoutesName.addfunddetails:
         return MaterialPageRoute(
             builder: (BuildContext context) => const AddFundDetails());
