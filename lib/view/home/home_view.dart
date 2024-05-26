@@ -124,7 +124,7 @@ class _HomeViewState extends State<HomeView> {
       'userId': currentUser.uid,
       'usercurrentBalance': userDoc.get('balance') ?? 0,
       'subscribtionCharges': subscription['charges'],
-      'dateTime': DateTime.now(),
+      'dateTime': subscription['date'],
       'subscribtionId': subscription['uuid'],
       'Uuid': uuid,
       'subscribtionStatus': subscribtionStatus,
@@ -140,14 +140,7 @@ class _HomeViewState extends State<HomeView> {
 
       if (existingRequest.docs.isNotEmpty) {
         Utils.toastMessage('You have already requested this subscription.');
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return MySubscribtions(
-            duration: subscription['duration'],
-            subscrintionCharges: subscription['charges'],
-            subscrintionStatus: subscribtionStatus,
-            date: subscription['date'],
-          );
-        }));
+
         setState(() {
           _isLoading = false;
         });
@@ -157,16 +150,14 @@ class _HomeViewState extends State<HomeView> {
           .collection('subscriptionRequests')
           .doc(uuid)
           .set(subscriptionRequestData);
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .collection('subscriptionRequests')
+          .doc(uuid)
+          .set(subscriptionRequestData);
 
       Utils.toastMessage('Subscription request sent successfully');
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return MySubscribtions(
-          duration: subscription['duration'],
-          subscrintionCharges: subscription['charges'],
-          subscrintionStatus: subscribtionStatus,
-          date: subscription['date'],
-        );
-      }));
     } catch (e) {
       Utils.toastMessage('Failed to create subscription request: $e');
     } finally {
