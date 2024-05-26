@@ -138,7 +138,7 @@ class _HomeViewState extends State<HomeView> {
           .get();
 
       if (existingRequest.docs.isNotEmpty) {
-        Utils.toastMessage('You have already requested this subscription.');
+        Utils.toastMessage('You have already requested the subscription.');
 
         setState(() {
           _isLoading = false;
