@@ -76,7 +76,11 @@ class _MySubscribtionsState extends State<MySubscribtions> {
             : _error != null
                 ? Center(child: Text(_error!))
                 : _subscriptions.isEmpty
-                    ? const Center(child: Text('No subscriptions found.'))
+                    ? const Center(
+                        child: Text(
+                        'No subscriptions found.',
+                        style: TextStyle(color: AppColor.whiteColor),
+                      ))
                     : ListView.builder(
                         itemCount: _subscriptions.length,
                         itemBuilder: (context, index) {

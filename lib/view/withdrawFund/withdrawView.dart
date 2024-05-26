@@ -24,10 +24,51 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
   TextEditingController nameController = TextEditingController();
   TextEditingController accountController = TextEditingController();
   TextEditingController amountController = TextEditingController();
-  String selectPaymentType = "UPI Bank";
+  TextEditingController bankController = TextEditingController();
   bool _isLoading = false;
   num? _totalAmount;
   final User? user = FirebaseAuth.instance.currentUser;
+  final FirebaseFirestore _firestoreInstance = FirebaseFirestore.instance;
+  List<Map<String, dynamic>> _bankDetails = [];
+  String? _selectedBankName;
+  @override
+  void initState() {
+    super.initState();
+    getBankDetails();
+  }
+
+  getBankDetails() async {
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+
+      QuerySnapshot qn =
+          await _firestoreInstance.collection('BankDetails').get();
+      List<Map<String, dynamic>> bankDetails = [];
+      for (var doc in qn.docs) {
+        bankDetails.add({
+          'accountHolderName': doc['accountHolderName'],
+          'accountNumber': doc['accountNumber'],
+          'bankName': doc['bankName'],
+          'uuid': doc['uuid'],
+        });
+      }
+
+      setState(() {
+        _bankDetails = bankDetails;
+        if (_bankDetails.isNotEmpty) {
+          _selectedBankName = _bankDetails[0]['bankName'];
+        }
+      });
+    } catch (e) {
+      print(e.toString());
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   void withDrawFun() async {
     if (nameController.text.isEmpty ||
@@ -39,9 +80,10 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
 
     final User? currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser == null) {
-      Utils.flushBarErrorMessage('please login first', context);
+      Utils.flushBarErrorMessage('Please login first', context);
       return;
     }
+
     setState(() {
       _isLoading = true;
     });
@@ -52,6 +94,32 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
         .get();
 
     final totalBalance = userDoc.get('balance') ?? 0;
+    final requestBalance = double.tryParse(amountController.text) ?? 0.0;
+
+    if (requestBalance > totalBalance) {
+      setState(() {
+        _isLoading = false;
+      });
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Insufficient Balance'),
+            content: const Text(
+                'Your current balance is less than the withdraw request.\nplease add funds'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
 
     try {
       var uuid = const Uuid().v1();
@@ -63,9 +131,9 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
             .set({
           'Total Balance': totalBalance,
           'AccountHolderName': nameController.text,
-          'PaymentType': selectPaymentType,
+          'PaymentType': _selectedBankName,
           'AccountNumber': accountController.text,
-          'Request blance': amountController.text,
+          'Request balance': requestBalance,
           'uuId': uuid,
           'currentUserId': currentuser.uid,
           'date': DateTime.now(),
@@ -73,7 +141,7 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
         Navigator.pushNamedAndRemoveUntil(
             context, RoutesName.home, (route) => false);
 
-        Utils.toastMessage('Successfully Submit Request');
+        Utils.toastMessage('Successfully Submitted Request');
       } else {
         Utils.toastMessage('No current user found');
       }
@@ -227,31 +295,28 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
                               textStyle: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                color: AppColor.whiteColor,
+                                color: Colors.white,
                               ),
                             ),
                             dropdownColor: const Color(0xff191A2F),
-                            value: selectPaymentType,
+                            value: _selectedBankName,
                             underline: const SizedBox(),
                             icon: const Icon(
                               Icons.expand_more_outlined,
-                              color: AppColor.whiteColor,
+                              color: Colors.white,
                             ),
                             iconSize: 24,
                             elevation: 16,
                             onChanged: (String? newValue) {
                               setState(() {
-                                selectPaymentType = newValue!;
+                                _selectedBankName = newValue!;
                               });
                             },
-                            items: <String>[
-                              'UPI Bank',
-                              'WALLET',
-                              'CARD',
-                            ].map<DropdownMenuItem<String>>((String value) {
+                            items: _bankDetails.map<DropdownMenuItem<String>>(
+                                (Map<String, dynamic> value) {
                               return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
+                                value: value['bankName'],
+                                child: Text(value['bankName']),
                               );
                             }).toList(),
                           ),
