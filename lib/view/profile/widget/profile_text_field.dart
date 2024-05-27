@@ -44,7 +44,7 @@ class ProfileWidgets extends StatelessWidget {
         titleAlignment: ListTileTitleAlignment.threeLine,
         title: Text(
           title,
-          style: TextStyle(color: AppColor.whiteColor),
+          style: const TextStyle(color: AppColor.whiteColor),
         ),
         trailing: Icon(
           trIcon,

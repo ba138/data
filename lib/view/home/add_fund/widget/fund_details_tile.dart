@@ -7,11 +7,11 @@ class FundTile extends StatelessWidget {
   final String subTitle;
   final Function onCopy;
   const FundTile({
-    Key? key,
+    super.key,
     required this.title,
     required this.subTitle,
     required this.onCopy,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

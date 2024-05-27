@@ -62,7 +62,7 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
         }
       });
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     } finally {
       setState(() {
         _isLoading = false;
@@ -96,7 +96,7 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
     final totalBalance = userDoc.get('balance') ?? 0;
     final requestBalance = double.tryParse(amountController.text) ?? 0.0;
 
-    if (requestBalance > totalBalance) {
+    if (requestBalance != totalBalance) {
       setState(() {
         _isLoading = false;
       });
