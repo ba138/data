@@ -61,7 +61,7 @@ class SubscribtionCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      duration,
+                      '$duration months',
                       style: GoogleFonts.getFont(
                         "Poppins",
                         textStyle: const TextStyle(

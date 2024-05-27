@@ -5,6 +5,7 @@ import 'package:data/Res/components/colors.dart';
 import 'package:data/Res/components/loading_manager.dart';
 import 'package:data/Res/components/vertical_speacing.dart';
 import 'package:data/utils/routes/routes_name.dart';
+import 'package:data/view/messages/my_messages.dart';
 import 'package:data/view/profile/widget/profile_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -49,11 +50,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
     if (user != null) {
       try {
-        String _uid = user!.uid;
-        final DocumentSnapshot userDoc = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(_uid)
-            .get();
+        String uid = user!.uid;
+        final DocumentSnapshot userDoc =
+            await FirebaseFirestore.instance.collection('users').doc(uid).get();
         if (userDoc != null || userDoc.data() != null) {
           _email = userDoc.get('email');
           _name = userDoc.get('name');
@@ -105,19 +104,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // Cast the data to Map<String, dynamic>
         Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
 
-        // Check if the field "Normal" exists in the document
-        if (userData.containsKey('Normal')) {
-          if (userData['Normal'].isNotEmpty) {
-            setState(() {
-              showBlockedPopup(context);
-            });
-          } else {
-            await Navigator.pushNamed(context, RoutesName.mymessages);
-          }
+        // Check if the category is "Normal"
+        if (userData['category'] == 'Normal') {
+          showBlockedPopup(context);
         } else {
-          await Navigator.pushNamed(context, RoutesName.mymessages);
+          await Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return MyMessages();
+          }));
         }
+      } else {
+        debugPrint('User document does not exist.');
       }
+    } else {
+      debugPrint('No user is currently signed in.');
     }
   }
 
