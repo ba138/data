@@ -267,7 +267,7 @@ class _HomeViewState extends State<HomeView> {
 
                                     return Text(
                                       _totalAmount != null
-                                          ? '₹$_totalAmount'
+                                          ? '₹${_totalAmount!.toStringAsFixed(0)}'
                                           : 'N/A',
                                       style: GoogleFonts.getFont(
                                         "Poppins",

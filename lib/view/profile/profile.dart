@@ -245,6 +245,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: 'My subscribtions'),
                 const Divider(),
                 ProfileWidgets(
+                    ontap: () {
+                      Navigator.pushNamed(context, RoutesName.incrementHistory);
+                    },
+                    tColor: const Color(0xffA24ABF),
+                    bColor: const Color(0xffDF9EF5),
+                    icon: Icons.history,
+                    trIcon: Icons.arrow_forward_ios,
+                    title: 'Increment History'),
+                const Divider(),
+                ProfileWidgets(
                     ontap: () async {
                       authInstance.signOut();
                       Utils.toastMessage('SuccessFully LogOut');

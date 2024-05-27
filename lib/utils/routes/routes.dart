@@ -3,6 +3,7 @@ import 'package:data/view/auth/forget_password.dart';
 import 'package:data/view/auth/login_view.dart';
 import 'package:data/view/auth/register_screen.dart';
 import 'package:data/view/auth/splash_view.dart';
+import 'package:data/view/history/increment_history.dart';
 import 'package:data/view/home/add_fund/add_fund.dart';
 import 'package:data/view/home/add_fund/add_fund_details.dart';
 import 'package:data/view/home/all_subscribtions.dart';
@@ -57,6 +58,9 @@ class Routes {
       case RoutesName.editprofileview:
         return MaterialPageRoute(
             builder: (BuildContext context) => const EditProfileView());
+      case RoutesName.incrementHistory:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  IncrementHistory());
       default:
         return MaterialPageRoute(builder: (_) {
           return const Scaffold(
