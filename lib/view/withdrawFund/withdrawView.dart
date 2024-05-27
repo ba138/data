@@ -106,7 +106,7 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
           return AlertDialog(
             title: const Text('Insufficient Balance'),
             content: const Text(
-                'Your current balance is less than the withdraw request.\nplease add funds'),
+                'Your current balance must qual to withdraw request.'),
             actions: <Widget>[
               TextButton(
                 child: const Text('OK'),
