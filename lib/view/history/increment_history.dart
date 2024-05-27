@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:data/view/history/widgets/historyCard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../Res/components/colors.dart';
-import 'widgets/textCard.dart';
 
-// ignore: must_be_immutable
-class MyMessages extends StatelessWidget {
-  MyMessages({super.key});
+class IncrementHistory extends StatelessWidget {
+  IncrementHistory({super.key});
   final ScrollController _scrollController = ScrollController();
   User? user = FirebaseAuth.instance.currentUser;
   @override
@@ -17,7 +15,7 @@ class MyMessages extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'my messages',
+          'Increment History',
           style: GoogleFonts.getFont(
             "Poppins",
             textStyle: const TextStyle(
@@ -46,8 +44,8 @@ class MyMessages extends StatelessWidget {
                   stream: FirebaseFirestore.instance
                       .collection("users")
                       .doc(user!.uid)
-                      .collection('chat')
-                      .orderBy('timestamp', descending: false)
+                      .collection('IcrementHistory')
+                      .orderBy('date', descending: false)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
@@ -66,7 +64,7 @@ class MyMessages extends StatelessWidget {
                     if (documents.isEmpty) {
                       return const Center(
                         child: Text(
-                          'No chats to show',
+                          'No History',
                           style: TextStyle(color: AppColor.whiteColor),
                         ),
                       );
@@ -88,13 +86,11 @@ class MyMessages extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final bankDetails =
                             documents[index].data() as Map<String, dynamic>;
-                        final String message = bankDetails['message'] ?? '';
-                        final Timestamp date = bankDetails['timestamp'] ?? '';
+                        // final String deposit = bankDetails['Action'] ?? '';
+                        final Timestamp date = bankDetails['date'] ?? '';
+                        final num amount = bankDetails['amount'] ?? '';
 
-                        return TextCard(
-                          mesg: message,
-                          date: date,
-                        );
+                        return HistoryCard(amount: amount, date: date);
                       },
                     );
                   },
