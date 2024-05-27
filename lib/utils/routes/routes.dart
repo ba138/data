@@ -58,9 +58,9 @@ class Routes {
       case RoutesName.editprofileview:
         return MaterialPageRoute(
             builder: (BuildContext context) => const EditProfileView());
-      case RoutesName.mymessages:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => const MyMessages());
+      // case RoutesName.mymessages:
+      //   return MaterialPageRoute(
+      //       builder: (BuildContext context) => const MyMessages());
       default:
         return MaterialPageRoute(builder: (_) {
           return const Scaffold(

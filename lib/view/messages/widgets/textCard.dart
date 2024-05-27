@@ -1,15 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../../../Res/components/colors.dart';
 
 class TextCard extends StatelessWidget {
   const TextCard({
     super.key,
+    required this.mesg,
+    required this.date,
   });
+  final String mesg;
+  final Timestamp date;
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = date.toDate();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -27,7 +35,7 @@ class TextCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  "Today",
+                  formattedDate,
                   style: GoogleFonts.getFont(
                     "Poppins",
                     textStyle: const TextStyle(
@@ -43,7 +51,7 @@ class TextCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 12),
             child: Text(
-              "Lorem ipsum dolor sit amet, consec.Lorem Lorem ipsum dolor sit amet, consec.Lorem Lorem ipsum dolor sit amet, consec.Lorem Lorem ipsum dolor sit amet, consec.Lorem",
+              mesg.toString(),
               style: GoogleFonts.getFont(
                 "Poppins",
                 textStyle: const TextStyle(
