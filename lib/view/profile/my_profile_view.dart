@@ -46,11 +46,9 @@ class _MyProfileViewState extends State<MyProfileView> {
     });
     if (user != null) {
       try {
-        String _uid = user!.uid;
-        final DocumentSnapshot userDoc = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(_uid)
-            .get();
+        String uid = user!.uid;
+        final DocumentSnapshot userDoc =
+            await FirebaseFirestore.instance.collection('users').doc(uid).get();
         if (userDoc != null || userDoc.data() != null) {
           _email = userDoc.get('email');
           _name = userDoc.get('name');

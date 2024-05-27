@@ -75,11 +75,9 @@ class _HomeViewState extends State<HomeView> {
     });
     if (user != null) {
       try {
-        String _uid = user!.uid;
-        final DocumentSnapshot userDoc = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(_uid)
-            .get();
+        String uid = user!.uid;
+        final DocumentSnapshot userDoc =
+            await FirebaseFirestore.instance.collection('users').doc(uid).get();
         if (userDoc.exists) {
           setState(() {
             _name = userDoc.get('name') ?? 'You';
@@ -87,7 +85,7 @@ class _HomeViewState extends State<HomeView> {
           });
         }
       } catch (e) {
-        print('$e');
+        debugPrint('$e');
       } finally {
         setState(() {
           _isLoading = false;

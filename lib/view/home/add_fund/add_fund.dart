@@ -137,7 +137,7 @@ class _AddFundState extends State<AddFund> {
         }
       });
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     } finally {
       setState(() {
         isLoading = false;

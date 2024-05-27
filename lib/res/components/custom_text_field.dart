@@ -13,8 +13,6 @@ class TextFieldCustom extends StatefulWidget {
     this.keyboardType,
     this.obscureText = false,
     this.validator,
-    // required this.preIcon,
-    // required this.preColor,
   });
 
   final String text;
@@ -23,8 +21,6 @@ class TextFieldCustom extends StatefulWidget {
   final bool obscureText;
   final String? hintText;
   final String? Function(String?)? validator;
-  // final IconData preIcon;
-  // final Color preColor;
   @override
   State<TextFieldCustom> createState() => _TextFieldCustomState();
 }
@@ -72,31 +68,7 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
               ),
             ),
             filled: true,
-            // prefixIcon: Icon(
-            //   widget.preIcon,
-            //   color: widget.preColor,
-            // ),
-            // suffixIcon: widget.obscureText
-            //     ? GestureDetector(
-            //         onTap: () {
-            //           setState(() => hidden = !hidden);
-            //         },
-            //         child: Icon(
-            //           hidden
-            //               ? Icons.visibility_off_outlined
-            //               : Icons.visibility_outlined,
-            //           color: hidden ? AppColor.whiteColor : AppColor.whiteColor,
-            //           size: 30,
-            //         ),
-            //       )
-            //     : null,
-            fillColor: Color(0xff2B2C4E),
-            // enabledBorder: const UnderlineInputBorder(
-            //   borderSide: BorderSide(color: AppColor.dividerColor),
-            // ),
-            // focusedBorder: const UnderlineInputBorder(
-            //   borderSide: BorderSide(color: AppColor.dividerColor),
-            // ),
+            fillColor: const Color(0xff2B2C4E),
           ),
           validator: widget.validator,
         ),

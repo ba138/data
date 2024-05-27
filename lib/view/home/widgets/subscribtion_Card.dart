@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:data/view/home/widgets/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
