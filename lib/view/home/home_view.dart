@@ -357,7 +357,7 @@ class _HomeViewState extends State<HomeView> {
                           child: Center(
                             child: Text.rich(
                               TextSpan(
-                                  text: '5% increase  every month\n',
+                                  text: 'Get increment on your deposited\n',
                                   style: GoogleFonts.getFont(
                                     "Poppins",
                                     textStyle: const TextStyle(
@@ -368,7 +368,7 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                   children: [
                                     TextSpan(
-                                      text: '  if you deposit amount',
+                                      text: '   amount every month',
                                       style: GoogleFonts.getFont(
                                         "Poppins",
                                         textStyle: const TextStyle(

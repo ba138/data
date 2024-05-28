@@ -44,8 +44,7 @@ class IncrementHistory extends StatelessWidget {
                   stream: FirebaseFirestore.instance
                       .collection("users")
                       .doc(user!.uid)
-                      .collection('IcrementHistory')
-                      .orderBy('date', descending: false)
+                      .collection('IncrementHistory')
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
