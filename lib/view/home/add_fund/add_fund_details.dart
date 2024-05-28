@@ -41,6 +41,7 @@ class _AddFundDetailsState extends State<AddFundDetails> {
           'accountHolderName': doc['accountHolderName'],
           'accountNumber': doc['accountNumber'],
           'bankName': doc['bankName'],
+          'ISFCCode': doc['ISFCCode'],
           'uuid': doc['uuid'],
         });
       }
@@ -128,7 +129,7 @@ class _AddFundDetailsState extends State<AddFundDetails> {
                   ),
                   const SizedBox(height: 16),
                   Container(
-                    height: MediaQuery.of(context).size.height / 2.4,
+                    height: MediaQuery.of(context).size.height / 2.1,
                     color: const Color(0xff2B2C4E),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 16.0),
@@ -163,6 +164,16 @@ class _AddFundDetailsState extends State<AddFundDetails> {
                             onCopy: () {
                               Clipboard.setData(ClipboardData(
                                   text: _selectedBankDetail?['accountNumber']));
+                              Utils.toastMessage("Text copied to clipboard");
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          FundTile(
+                            title: 'ISFC Code',
+                            subTitle: _selectedBankDetail?['ISFCCode'] ?? '',
+                            onCopy: () {
+                              Clipboard.setData(ClipboardData(
+                                  text: _selectedBankDetail?['ISFCCode']));
                               Utils.toastMessage("Text copied to clipboard");
                             },
                           ),
