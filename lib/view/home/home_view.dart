@@ -174,197 +174,190 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: LoadingManager(
-      isLoading: _isLoading,
-      child: SafeArea(
+      body: LoadingManager(
+        isLoading: _isLoading,
+        child: SafeArea(
           child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 262.0,
-              width: double.infinity,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  CustomPaint(
-                    painter: TrianglePainter(),
-                    size: const Size(double.infinity, 262.0),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 262.0,
+                  width: double.infinity,
+                  child: Stack(
+                    clipBehavior: Clip.none,
                     children: [
-                      const VerticalSpeacing(30),
-                      ListTile(
-                        leading: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              RoutesName.profile,
-                            );
-                          },
-                          child: CircleAvatar(
-                            radius: 40.0,
-                            backgroundImage: NetworkImage(
-                              _pImage ?? defaultProfile,
-                            ),
-                          ),
-                        ),
-                        title: Text(
-                          _name ?? 'Default Name',
-                          style: GoogleFonts.getFont(
-                            "Poppins",
-                            textStyle: const TextStyle(
-                              color: AppColor.whiteColor,
-                            ),
-                          ),
-                        ),
-                        subtitle: Text(
-                          'Welcome',
-                          style: GoogleFonts.getFont(
-                            "Poppins",
-                            textStyle: const TextStyle(
-                              color: AppColor.whiteColor,
-                            ),
-                          ),
-                        ),
+                      CustomPaint(
+                        painter: TrianglePainter(),
+                        size: const Size(double.infinity, 262.0),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Column(
-                            children: [
-                              Text(
-                                'Total Balance',
-                                style: GoogleFonts.getFont(
-                                  "Poppins",
-                                  textStyle: const TextStyle(
-                                      color: AppColor.whiteColor,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w400),
+                          const VerticalSpeacing(30),
+                          ListTile(
+                            leading: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  RoutesName.profile,
+                                );
+                              },
+                              child: CircleAvatar(
+                                radius: 40.0,
+                                backgroundImage: NetworkImage(
+                                  _pImage ?? defaultProfile,
                                 ),
                               ),
-                              const VerticalSpeacing(5.0),
-                              StreamBuilder<DocumentSnapshot>(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(user?.uid)
-                                      .snapshots(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return const CircularProgressIndicator();
-                                    }
-                                    if (snapshot.hasError) {
-                                      return Text('Error: ${snapshot.error}');
-                                    }
-                                    if (!snapshot.hasData ||
-                                        !snapshot.data!.exists) {
-                                      return const Text('N/A');
-                                    }
-
-                                    final userDoc = snapshot.data!;
-                                    _totalAmount = userDoc.get('balance') ?? 0;
-
-                                    return Text(
-                                      _totalAmount != null
-                                          ? '₹${_totalAmount!.toStringAsFixed(0)}'
-                                          : 'N/A',
-                                      style: GoogleFonts.getFont(
-                                        "Poppins",
-                                        textStyle: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 30.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    RoutesName.addfunddetails,
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColor.buttonColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                child: const Text(
-                                  'Add Fund',
-                                  style: TextStyle(color: AppColor.whiteColor),
-                                ),
-                              ),
-                              const VerticalSpeacing(16.0),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, RoutesName.withdrawFund);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColor.whiteColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                child: const Text(
-                                  'Withdraw',
-                                  style: TextStyle(color: AppColor.blackColor),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: -50, // Adjust this value as needed
-                    left: MediaQuery.of(context).size.width / 3 -
-                        100, // Centers the container horizontally
-                    child: Container(
-                      height: 80,
-                      width: 327,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            Color(0xFF3EEAAC),
-                            Color(0xFF613EEA),
-                          ],
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0x33000000),
-                            offset: Offset(4, 4),
-                            blurRadius: 6,
-                            spreadRadius: 4,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text.rich(
-                          TextSpan(
-                              text: '5% increase  every month\n',
+                            ),
+                            title: Text(
+                              _name ?? 'Default Name',
                               style: GoogleFonts.getFont(
                                 "Poppins",
                                 textStyle: const TextStyle(
                                   color: AppColor.whiteColor,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              children: [
-                                TextSpan(
-                                  text: '  if you deposit amount',
+                            ),
+                            subtitle: Text(
+                              'Welcome',
+                              style: GoogleFonts.getFont(
+                                "Poppins",
+                                textStyle: const TextStyle(
+                                  color: AppColor.whiteColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    'Total Balance',
+                                    style: GoogleFonts.getFont(
+                                      "Poppins",
+                                      textStyle: const TextStyle(
+                                          color: AppColor.whiteColor,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                  const VerticalSpeacing(5.0),
+                                  StreamBuilder<DocumentSnapshot>(
+                                      stream: FirebaseFirestore.instance
+                                          .collection('users')
+                                          .doc(user?.uid)
+                                          .snapshots(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const CircularProgressIndicator();
+                                        }
+                                        if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        }
+                                        if (!snapshot.hasData ||
+                                            !snapshot.data!.exists) {
+                                          return const Text('N/A');
+                                        }
+
+                                        final userDoc = snapshot.data!;
+                                        _totalAmount =
+                                            userDoc.get('balance') ?? 0;
+
+                                        return Text(
+                                          _totalAmount != null
+                                              ? '₹${_totalAmount!.toStringAsFixed(0)}'
+                                              : 'N/A',
+                                          style: GoogleFonts.getFont(
+                                            "Poppins",
+                                            textStyle: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 30.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        RoutesName.addfunddetails,
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColor.buttonColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'Add Fund',
+                                      style:
+                                          TextStyle(color: AppColor.whiteColor),
+                                    ),
+                                  ),
+                                  const VerticalSpeacing(16.0),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, RoutesName.withdrawFund);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColor.whiteColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'Withdraw',
+                                      style:
+                                          TextStyle(color: AppColor.blackColor),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        bottom: -50, // Adjust this value as needed
+                        left: MediaQuery.of(context).size.width / 3 -
+                            100, // Centers the container horizontally
+                        child: Container(
+                          height: 80,
+                          width: 327,
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Color(0xFF3EEAAC),
+                                Color(0xFF613EEA),
+                              ],
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x33000000),
+                                offset: Offset(4, 4),
+                                blurRadius: 6,
+                                spreadRadius: 4,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text.rich(
+                              TextSpan(
+                                  text: '5% increase  every month\n',
                                   style: GoogleFonts.getFont(
                                     "Poppins",
                                     textStyle: const TextStyle(
@@ -373,77 +366,90 @@ class _HomeViewState extends State<HomeView> {
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                ),
-                              ]),
+                                  children: [
+                                    TextSpan(
+                                      text: '  if you deposit amount',
+                                      style: GoogleFonts.getFont(
+                                        "Poppins",
+                                        textStyle: const TextStyle(
+                                          color: AppColor.whiteColor,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            const VerticalSpeacing(73.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Subscrptions',
-                    style: GoogleFonts.getFont(
-                      "Poppins",
-                      textStyle: const TextStyle(
-                        color: AppColor.whiteColor,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(
-                          context, RoutesName.allSubscriptionView);
-                    },
-                    child: Text(
-                      'Vew all',
-                      style: GoogleFonts.getFont(
-                        "Poppins",
-                        textStyle: const TextStyle(
-                          color: AppColor.whiteColor,
-                          fontSize: 16.0,
+                ),
+                const VerticalSpeacing(73.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Subscrptions',
+                        style: GoogleFonts.getFont(
+                          "Poppins",
+                          textStyle: const TextStyle(
+                            color: AppColor.whiteColor,
+                            fontSize: 16.0,
+                          ),
                         ),
                       ),
-                    ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, RoutesName.allSubscriptionView);
+                        },
+                        child: Text(
+                          'Vew all',
+                          style: GoogleFonts.getFont(
+                            "Poppins",
+                            textStyle: const TextStyle(
+                              color: AppColor.whiteColor,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-              child: ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: _subsCrbtions.length,
-                itemBuilder: (context, index) {
-                  final subscription = _subsCrbtions[index];
-                  return SubscribtionCard(
-                    bgColor: const Color(0xff3F30BD),
-                    charge: subscription['charges'],
-                    date: subscription['date'],
-                    duration: subscription['duration'],
-                    subscribtionStatus: subscribtionStatus,
-                    ontapSubscribe: () {
-                      createSubscriptionRequest(subscription);
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 20.0),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: _subsCrbtions.length,
+                    itemBuilder: (context, index) {
+                      final subscription = _subsCrbtions[index];
+                      return SubscribtionCard(
+                        bgColor: const Color(0xff3F30BD),
+                        charge: subscription['charges'],
+                        date: subscription['date'],
+                        duration: subscription['duration'],
+                        subscribtionStatus: subscribtionStatus,
+                        ontapSubscribe: () {
+                          createSubscriptionRequest(subscription);
+                        },
+                      );
                     },
-                  );
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10.0),
-              ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 10.0),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      )),
-    ));
+      ),
+    );
   }
 }
