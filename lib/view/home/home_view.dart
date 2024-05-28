@@ -368,7 +368,7 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                   children: [
                                     TextSpan(
-                                      text: '   amount every month',
+                                      text: '         amount every month',
                                       style: GoogleFonts.getFont(
                                         "Poppins",
                                         textStyle: const TextStyle(
