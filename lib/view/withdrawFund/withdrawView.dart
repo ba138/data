@@ -243,7 +243,7 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
                       ),
                       const VerticalSpeacing(16),
                       TextFieldCustom(
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.name,
                         controller: accountController,
                         maxLines: 1,
                         text: 'Account Number',
@@ -251,7 +251,7 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
                       ),
                       const VerticalSpeacing(16),
                       TextFieldCustom(
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.name,
                         controller: iSFCCodeController,
                         maxLines: 1,
                         text: 'ISFCCode',

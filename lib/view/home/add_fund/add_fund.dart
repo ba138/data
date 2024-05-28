@@ -252,7 +252,7 @@ class _AddFundState extends State<AddFund> {
                   const VerticalSpeacing(16),
                   TextFieldCustom(
                     controller: accountNumberController,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.name,
                     maxLines: 1,
                     text: 'Account Number',
                     hintText: "",
