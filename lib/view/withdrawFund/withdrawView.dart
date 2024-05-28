@@ -30,48 +30,6 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
   bool _isLoading = false;
   num? _totalAmount;
   final User? user = FirebaseAuth.instance.currentUser;
-  // final FirebaseFirestore _firestoreInstance = FirebaseFirestore.instance;
-  // List<Map<String, dynamic>> _bankDetails = [];
-  // String? _selectedBankName;
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getBankDetails();
-  // }
-
-  // getBankDetails() async {
-  //   try {
-  //     setState(() {
-  //       _isLoading = true;
-  //     });
-
-  //     QuerySnapshot qn =
-  //         await _firestoreInstance.collection('BankDetails').get();
-  //     List<Map<String, dynamic>> bankDetails = [];
-  //     for (var doc in qn.docs) {
-  //       bankDetails.add({
-  //         'accountHolderName': doc['accountHolderName'],
-  //         'accountNumber': doc['accountNumber'],
-  //         'bankName': doc['bankName'],
-  //         'uuid': doc['uuid'],
-  //       });
-  //     }
-
-  //     setState(() {
-  //       _bankDetails = bankDetails;
-  //       if (_bankDetails.isNotEmpty) {
-  //         _selectedBankName = _bankDetails[0]['bankName'];
-  //       }
-  //     });
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //   } finally {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
-
   void withDrawFun() async {
     if (nameController.text.isEmpty ||
         accountController.text.isEmpty ||
