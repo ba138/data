@@ -90,11 +90,30 @@ class MyMessages extends StatelessWidget {
                             documents[index].data() as Map<String, dynamic>;
                         final String message = bankDetails['message'] ?? '';
                         final Timestamp date = bankDetails['timestamp'] ?? '';
-
-                        return TextCard(
-                          mesg: message,
-                          date: date,
-                        );
+                        return message.startsWith('http')
+                            ? Padding(
+                                padding: const EdgeInsets.only(bottom: 10.0),
+                                child: Image.network(
+                                  message,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Text(
+                                      'Error loading image',
+                                      style: GoogleFonts.getFont(
+                                        "Poppins",
+                                        textStyle: const TextStyle(
+                                          fontSize: 14,
+                                          color: AppColor.whiteColor,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              )
+                            : TextCard(
+                                mesg: message,
+                                date: date,
+                              );
                       },
                     );
                   },

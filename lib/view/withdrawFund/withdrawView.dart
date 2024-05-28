@@ -25,55 +25,59 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
   TextEditingController accountController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   TextEditingController bankController = TextEditingController();
+  TextEditingController iSFCCodeController = TextEditingController();
+
   bool _isLoading = false;
   num? _totalAmount;
   final User? user = FirebaseAuth.instance.currentUser;
-  final FirebaseFirestore _firestoreInstance = FirebaseFirestore.instance;
-  List<Map<String, dynamic>> _bankDetails = [];
-  String? _selectedBankName;
-  @override
-  void initState() {
-    super.initState();
-    getBankDetails();
-  }
+  // final FirebaseFirestore _firestoreInstance = FirebaseFirestore.instance;
+  // List<Map<String, dynamic>> _bankDetails = [];
+  // String? _selectedBankName;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getBankDetails();
+  // }
 
-  getBankDetails() async {
-    try {
-      setState(() {
-        _isLoading = true;
-      });
+  // getBankDetails() async {
+  //   try {
+  //     setState(() {
+  //       _isLoading = true;
+  //     });
 
-      QuerySnapshot qn =
-          await _firestoreInstance.collection('BankDetails').get();
-      List<Map<String, dynamic>> bankDetails = [];
-      for (var doc in qn.docs) {
-        bankDetails.add({
-          'accountHolderName': doc['accountHolderName'],
-          'accountNumber': doc['accountNumber'],
-          'bankName': doc['bankName'],
-          'uuid': doc['uuid'],
-        });
-      }
+  //     QuerySnapshot qn =
+  //         await _firestoreInstance.collection('BankDetails').get();
+  //     List<Map<String, dynamic>> bankDetails = [];
+  //     for (var doc in qn.docs) {
+  //       bankDetails.add({
+  //         'accountHolderName': doc['accountHolderName'],
+  //         'accountNumber': doc['accountNumber'],
+  //         'bankName': doc['bankName'],
+  //         'uuid': doc['uuid'],
+  //       });
+  //     }
 
-      setState(() {
-        _bankDetails = bankDetails;
-        if (_bankDetails.isNotEmpty) {
-          _selectedBankName = _bankDetails[0]['bankName'];
-        }
-      });
-    } catch (e) {
-      debugPrint(e.toString());
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
+  //     setState(() {
+  //       _bankDetails = bankDetails;
+  //       if (_bankDetails.isNotEmpty) {
+  //         _selectedBankName = _bankDetails[0]['bankName'];
+  //       }
+  //     });
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //   } finally {
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //   }
+  // }
 
   void withDrawFun() async {
     if (nameController.text.isEmpty ||
         accountController.text.isEmpty ||
-        amountController.text.isEmpty) {
+        amountController.text.isEmpty ||
+        bankController.text.isEmpty ||
+        iSFCCodeController.text.isEmpty) {
       Utils.toastMessage('Please fill all the fields');
       return;
     }
@@ -131,9 +135,10 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
             .set({
           'Total Balance': totalBalance,
           'AccountHolderName': nameController.text,
-          'PaymentType': _selectedBankName,
+          'PaymentType': bankController.text,
           'AccountNumber': accountController.text,
           'Request balance': requestBalance,
+          'ISFCCode': iSFCCodeController.text,
           'uuId': uuid,
           'currentUserId': currentuser.uid,
           'date': DateTime.now(),
@@ -271,56 +276,12 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
                         hintText: "Enter Your Name",
                       ),
                       const VerticalSpeacing(16),
-                      Text(
-                        'Select Bank',
-                        style: GoogleFonts.getFont(
-                          "Poppins",
-                          textStyle: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.whiteColor,
-                          ),
-                        ),
-                      ),
-                      const VerticalSpeacing(10),
-                      Container(
-                        height: 50,
-                        color: const Color(0xff2B2C4E),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: DropdownButton<String>(
-                            isExpanded: true,
-                            style: GoogleFonts.getFont(
-                              "Poppins",
-                              textStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              ),
-                            ),
-                            dropdownColor: const Color(0xff191A2F),
-                            value: _selectedBankName,
-                            underline: const SizedBox(),
-                            icon: const Icon(
-                              Icons.expand_more_outlined,
-                              color: Colors.white,
-                            ),
-                            iconSize: 24,
-                            elevation: 16,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedBankName = newValue!;
-                              });
-                            },
-                            items: _bankDetails.map<DropdownMenuItem<String>>(
-                                (Map<String, dynamic> value) {
-                              return DropdownMenuItem<String>(
-                                value: value['bankName'],
-                                child: Text(value['bankName']),
-                              );
-                            }).toList(),
-                          ),
-                        ),
+                      TextFieldCustom(
+                        keyboardType: TextInputType.name,
+                        controller: bankController,
+                        maxLines: 1,
+                        text: 'Bank Name',
+                        hintText: "Enter Your Bank Name",
                       ),
                       const VerticalSpeacing(16),
                       TextFieldCustom(
@@ -328,6 +289,14 @@ class _WithdrawFundsViewState extends State<WithdrawFundsView> {
                         controller: accountController,
                         maxLines: 1,
                         text: 'Account Number',
+                        hintText: "*******",
+                      ),
+                      const VerticalSpeacing(16),
+                      TextFieldCustom(
+                        keyboardType: TextInputType.number,
+                        controller: iSFCCodeController,
+                        maxLines: 1,
+                        text: 'ISFCCode',
                         hintText: "*******",
                       ),
                       const VerticalSpeacing(16),
